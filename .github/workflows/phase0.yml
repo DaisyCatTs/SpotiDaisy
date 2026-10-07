@@ -1,0 +1,30 @@
+name: Daisy baseline
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - '.github/workflows/phase0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Formatting and manifest
+        run: |
+          cargo fmt --all --check
+          cargo metadata --locked --no-deps --format-version 1 > /dev/null
+      - name: Packaging contracts
+        run: |
+          python3 packaging/flatpak/test-metainfo.py
+          python3 packaging/test-release-names.py
+          python3 packaging/test-launchers.py
