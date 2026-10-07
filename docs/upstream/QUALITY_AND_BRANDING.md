@@ -61,7 +61,7 @@ The CI workflow is `.github/workflows/ci.yml`.
   (`.github/workflows/ci.yml:159-191`).
 - CI builds the docs site with Jekyll (`.github/workflows/ci.yml:193-211`).
 
-No local CI execution result is recorded in this file.
+Executed local checks and final GitHub CI results are recorded in VALIDATION.md.
 
 ## Branch protection baseline
 
@@ -73,12 +73,12 @@ Reported by parent Phase 0 work after this audit began:
 - `dev` is now protected with linear history, no force pushes, no deletion, and
   administrator enforcement.
 - Main now requires strict checks for quality, all four platform test jobs,
-  Nix package and docs. These names have not yet been validated by a fork run.
+  Nix package and docs. All seven names exactly match the successful fork run.
 - Remote dev was created at the baseline, then advanced by the focused
   policy/CI commit `a073de4f3e7367c021294c65e0b6293167608613`.
-- Actions permissions report enabled, but the workflow registry and run list
-  remain empty. Explicit fork dispatch returns 404 despite the workflow file
-  existing in the contents API. See VALIDATION.md for the unresolved gate.
+- Actions registration initially failed with an empty registry/404. After the
+  Daisy baseline workflow was added, registration succeeded. Both quick baseline
+  runs and the full seven-job CI matrix passed. See VALIDATION.md and CLOSEOUT.md.
 
 These are repository-hosting settings, not facts derived from local source
 files.
@@ -270,6 +270,10 @@ package installation, update compatibility, and user data handling.
 ## Phase 0 CI closeout
 
 A read-only Daisy baseline workflow is now registered and passing. The full
-inherited CI matrix is registered and running on dev. See CLOSEOUT.md and
+inherited CI matrix passed all seven jobs on dev. See CLOSEOUT.md and
 VALIDATION.md for run identifiers and final observed coverage. Earlier statements
 about an empty fork registry describe the intake state and are superseded.
+
+Observed CI includes native Windows/ARM static-runtime and installer checks,
+macOS bundle/helper and native keyring checks, Linux suites, Nix build and docs.
+The Ubuntu 26 ubuntu-latest migration annotation is retained as a future CI risk.

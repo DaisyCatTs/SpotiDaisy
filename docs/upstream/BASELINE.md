@@ -41,7 +41,7 @@ pushes/deletion, and applies to administrators on both main and dev. Main also
 requires one PR approval and dismisses stale approvals. Dev permits direct
 focused work. Main requires strict status checks named `quality`, the four
 platform `test (...)` jobs, `Nix package`, and `docs`. Their names come from the
-workflow; full matrix validation is now running after successful registration. Protection alone is not a complete
+workflow; full matrix validation now passed after successful registration. Protection alone is not a complete
 release gate. The baseline tag was also published to origin without using a
 release-triggering `v*` tag.
 Snapshots: [main](evidence/main-protection.json), [dev](evidence/dev-protection.json).
@@ -85,7 +85,7 @@ repositories will remain available indefinitely.
 ## Closeout follow-up
 
 The audit/test fixes are published to origin/dev. A new read-only Daisy baseline
-workflow registered successfully, and the full native CI matrix is now running.
+workflow registered successfully, and the full native CI matrix passed all seven jobs.
 See CLOSEOUT.md for run links and observed results. A second safe upstream fetch
 confirmed upstream/main remains the exact baseline SHA. Dev currently has four
 Daisy commits ahead and zero behind; no upstream commit has been merged/ported.

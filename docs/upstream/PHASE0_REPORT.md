@@ -9,10 +9,13 @@ The authoritative command/measurement detail is [VALIDATION.md](VALIDATION.md).
 Intake was a clean, complete checkout on main, tracking origin/main. Origin is
 DaisyCatTs/SpotiDaisy. Upstream was absent, now fetches crmne/spotifast and has an
 inert push URL. Work moved safely to dev. Main is unchanged at the baseline.
-Dev contains the focused policy/CI commit `a073de4f3e7367c021294c65e0b6293167608613`.
+Dev contains the four Phase 0 commits through `4c326af0d3ae85bd8b3c0039c3b6a26880ec0607`.
+Closeout documentation is published on audit/phase0-closeout, based on dev, so
+document publication does not cancel the dev CI run. The current working tree
+is on that focused branch; main remains unchanged.
 Main and dev reject force/deletion and require linear history, including admins;
 main additionally requires review and seven strict status contexts. Fork CI
-results and context wiring remain unvalidated. No upstream merge occurred.
+passed all seven jobs, and required context names match the observed jobs. No upstream merge occurred.
 
 ## 2. Exact upstream baseline
 
@@ -89,8 +92,9 @@ No new application crate or version change.
 Windows: Credential Manager, native output/media/tray/thumbbar/URL handler.
 macOS: Keychain, media/menu/Dock/URL/notch/Touch Bar guard and bundle updates.
 Linux: Secret Service, MPRIS, PulseAudio/PipeWire-compatible output, Wayland/X11,
-tray/portals and Flatpak. Windows x64 ran; WSL packaging/docs ran. The other
-native targets were inspected, not built or tested.
+tray/portals and Flatpak. Windows x64 ran locally; WSL packaging/docs ran. GitHub CI compiled/tested
+Linux, macOS, Windows x64 and Windows ARM, and built Nix. Real desktop/audio behavior on those
+other platforms remains unvalidated.
 
 ## 7. Tests/build results
 
@@ -115,6 +119,11 @@ private commit 377.391-378.254 MiB. Its binary hash matches the
 published upstream v0.12.0 Windows portable payload, associated with the release
 tag eleven commits before our checkout. This is artifact identity, not signed
 source-build provenance. No login/settings were modified or grants exported.
+
+A further 30 minutes of installed-session observations were captured without
+controlling playback: the final 20-minute interval averaged 0.04041% CPU,
+79.492-135.262 MiB working set and 416.000 to 419.969 MiB private commit.
+These characterize the observed session, not a leak-free or exact-build claim.
 
 Optimized isolated demo startup and ten-minute paused/static memory samples are
 in performance.json/startup.csv/idle-soak.csv: fresh-profile window readiness
@@ -187,10 +196,10 @@ protections changed; runtime source and application dependencies did not.
 
 The master plan is authoritative. Inventory, exact SHA, remotes, protected branch
 structure/dev, upstream documents, screenshots, dependency/architecture/license
-audits and branding plan are validated audit deliverables. Complete cold/exact-build performance coverage and fork CI remain blocked.
+audits and branding plan are validated audit deliverables. Complete cold/exact-build performance coverage remains unvalidated.
 Completed Phase 0 rows: inventory fork; upstream SHA; remotes; branch protection;
 dev; upstream docs; baseline tests; screenshots; dependencies; architecture; licensing audit;
-branding replacement plan. Completed Task A rows: root; branch/remotes; exact
+branding replacement plan; CI. Completed Task A rows: root; branch/remotes; exact
 relationship; architecture; features; existing Daisy changes; tests; demo; screenshots;
 upstream docs; ADRs. All six Task B rows completed.
 Task A/B rows distinguish executed successes from blocked validation. No Phase 1
@@ -198,7 +207,7 @@ or later feature checklist was advanced.
 
 ## 16. Blocked/unresolved
 
-Native matrix/Nix completion; real cold startup and exact-build authenticated
+Real cold startup and exact-build authenticated
 performance; multi-hour/day browsing/audio soak; legal/package attribution
 compliance and upstream advisory remediation. The last two were audited but are
 release risks, not scope for a broad Phase 0 dependency/audio rewrite.
@@ -214,6 +223,6 @@ Use the clipping capture as a real constraint. Do not start Pure Shuffle, local
 music, provider/audio expansion or Daisy Sound automatically.
 
 Closeout follow-up: audit/test fixes are pushed to dev, the fast Daisy baseline
-workflow passed, and the full CI matrix is active. See CLOSEOUT.md for the exact
+workflow passed, and all seven full CI matrix jobs passed. See CLOSEOUT.md for the exact
 run and security/licensing priorities. Stable main and supplier dependency pins
 remain unchanged.

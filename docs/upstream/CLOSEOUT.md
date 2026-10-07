@@ -14,11 +14,13 @@ Updated 2026-10-07. No later-phase implementation is authorized here.
 Closeout documents are on `audit/phase0-closeout`, based on published dev. This
 focused branch lets evidence be published without interrupting dev CI.
 
-## Active validation
+## Validated CI
 
 Full matrix run: https://github.com/DaisyCatTs/SpotiDaisy/actions/runs/37685448644
-at `4c326af0d3ae85bd8b3c0039c3b6a26880ec0607`. Final results are recorded in
-VALIDATION.md when observed; registration alone does not complete the CI checkbox.
+at `4c326af0d3ae85bd8b3c0039c3b6a26880ec0607`. All seven jobs passed. Main required context names exactly match those jobs.
+Results, steps and test summaries are retained in evidence/ci-closeout.json,
+required-checks.json and ci-test-summaries.json. CI is validated, not merely
+registered. See VALIDATION.md for platform runtime limits.
 Two earlier full runs were cancelled during duplicate-dispatch/concurrency cleanup.
 No release workflows, publishing steps or stable-main commits were triggered.
 
@@ -103,3 +105,8 @@ paint. A real cold-start run requires a controlled restart/cache condition and
 user-compatible scheduling. Exact-build authenticated tests require deliberately
 switching applications; do not copy grants or change the existing account to
 manufacture a result. Ten-minute samples cannot establish multi-hour cache bounds.
+
+Extended installed session: a further 20-minute/600-sample observation completed.
+Mean CPU 0.04041%; resident RAM 79.492-135.262 MiB; private commit
+416.000 to 419.969 MiB. The two session observations total 30 sampled minutes;
+unknown workload and a short interval preclude a leak/plateau conclusion.

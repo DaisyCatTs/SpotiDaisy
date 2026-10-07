@@ -1,7 +1,8 @@
 # Phase 0 validation and performance evidence
 
 Audit date: 2026-10-07. No runtime source or dependency versions changed.
-This is a baseline of successes **and failures**, not a claim of green CI.
+This records successes, resolved failures and remaining validation gaps. The
+final seven-job CI run passed; advisory findings and measurement limits remain.
 
 ## Environment and build setup
 
@@ -56,7 +57,7 @@ were restored and that incidental lockfile change is not part of Phase 0.
 | `py packaging/test-launchers.py` on Windows | Fail: missing Unix true/Ruby and path semantics | `evidence/launchers-windows.txt` |
 | Launcher tests under WSL, checkout and Git archive | Fail: CRLF conversion, including desktop payload | `evidence/launchers-wsl-configured.txt`, `evidence/launchers-lf-baseline.txt` |
 | Launcher tests under WSL after normalizing only scratch shell files | Fail: desktop payload still CRLF; diagnosis superseded below | `evidence/launchers-normalized-scratch.txt` |
-| `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt`, `evidence/jekyll-closeout.txt` |
+| `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt`, `evidence/jekyll-closeout.txt`, `evidence/jekyll-closeout-final.txt` |
 | `cargo deny check advisories` | Fail: 4 vulnerabilities, 1 unmaintained warning/error | `evidence/advisories.txt` |
 | `cargo deny check` without a repository policy | Fail: advisories and default license policy rejects common licenses; bans/sources checks completed with warnings | See SECURITY_AND_DEPENDENCIES.md; generic output not retained as a multi-megabyte artifact |
 
@@ -153,19 +154,29 @@ existing CI registered. Registration was initially asynchronous; the specific
 server-side cause of the earlier empty registry is not established.
 
 The read-only Daisy baseline push and manual runs passed, including formatting,
-manifest and four launcher contracts. Full native CI run 37685448644 is underway:
+manifest and four launcher contracts. Full native CI run 37685448644 completed successfully:
 https://github.com/DaisyCatTs/SpotiDaisy/actions/runs/37685448644 .
-Registration is resolved; seven-job completion is not claimed until observed.
+All seven required jobs passed: quality, Linux, macOS, Windows x64, Windows ARM,
+Nix package and docs. Main required context names were read back and exactly
+match those successful jobs. See evidence/ci-closeout.json, required-checks.json
+and ci-test-summaries.json. No source/runtime/Cargo differences exist between
+the tested dev SHA and the focused closeout branch.
 Two earlier full runs were cancelled during duplicate/concurrency cleanup.
 
 One initial gh workflow run implicitly resolved upstream and was denied 403;
 no upstream workflow started. All closeout commands explicitly target Daisy.
 Main remains unchanged. No release/deployment/publishing workflow was triggered.
 
-Windows x64 was built and run. WSL tested packaging scripts and the docs site,
-not a Linux GUI/audio build. macOS, Windows ARM, Linux native GUI/audio, Nix,
-Inno installer validation, package installation, signing/notarization and
-release artifact attribution were not executed here.
+Windows x64 was built and run locally. WSL tested packaging/docs. GitHub CI
+built/tested Linux, macOS, Windows x64 and Windows ARM, built Nix, verified
+Windows static runtime/machine architecture and Inno installer syntax, and
+validated macOS bundle/helper startup. Windows/macOS native dummy credential
+round trips passed. Linux native credential-store probing is intentionally
+skipped by the inherited CI condition and remains unvalidated on a real desktop.
+Real GUI/audio/device behavior outside this Windows machine, actual package
+installation, signing/notarization and other release artifacts remain untested.
+One published upstream Windows portable archive was checksum-verified and
+inspected for attribution material; its binary was not executed.
 
 ## Remaining measurement gaps
 
@@ -189,3 +200,18 @@ so these are session-observation metrics, not a new playing/paused benchmark.
 Working set can be trimmed by the OS and is not interchangeable with private
 commit. The +0.918 MiB short-interval change does not prove a leak or long-term
 stability. See evidence/installed-observed-session.json and its 300-row CSV.
+
+CI emitted an informational runner warning: ubuntu-latest begins migration to
+Ubuntu 26 on October 19, 2026. Track native/package compatibility when that moves;
+this run passed. Dev intentionally allows direct work without required-status
+gates; stable main enforces all seven.
+
+## Extended memory observation
+
+The same installed process was observed for another twenty minutes (600 samples):
+mean machine CPU 0.04041%, maximum 0.878%; working set 79.492-135.262 MiB;
+private commit 416.000 to 419.969 MiB (+3.969 MiB). Combined with the separate
+10-minute observation, this provides 30 minutes of sampled session behavior.
+The process remained alive throughout. Playback/window/workload state was not
+controlled, so the samples do not prove a leak, a steady plateau or exact-build
+performance. See evidence/installed-long-session.json and its CSV.
