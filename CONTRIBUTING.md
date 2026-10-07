@@ -1,5 +1,11 @@
 # Contributing to Spotifast
 
+> DaisySpoti fork: `DaisySpoti_MASTER_PLAN.md` is the canonical product policy.
+> Work targets `dev` or focused branches; stable `main` is protected. Do not
+> merge upstream wholesale. The inherited guide below describes the current
+> implementation and checks, and applies unless the Daisy plan overrides it.
+> See `docs/upstream/BASELINE.md` for the frozen supplier baseline and audit.
+
 Spotifast is a native Spotify client. Changes should improve the
 desktop app without adding a browser, fallback services, or another backend.
 

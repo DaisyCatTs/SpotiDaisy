@@ -1,5 +1,15 @@
 # Spotifast agent guide
 
+## DaisySpoti policy override
+
+This is now the DaisySpoti fork. `DaisySpoti_MASTER_PLAN.md` is canonical;
+`DaisySpoti_CODEX_HANDOFF.md` supplies its workflow. Work on `dev` or focused
+branches, never directly on stable `main`. Do not merge `upstream/main`
+wholesale. Preserve the baseline and record deliberate ports in `docs/upstream/`.
+The inherited policies below apply where they do not conflict with the Daisy
+plan or explicit user instructions. Phase 0 does not authorize later features,
+UI redesign, audio expansion, or identity/persistence migration.
+
 Follow `CONTRIBUTING.md`; it is the canonical product and contribution policy.
 These instructions add implementation constraints for coding agents.
 
