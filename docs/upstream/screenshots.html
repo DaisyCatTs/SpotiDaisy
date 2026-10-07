@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaisySpoti Phase 0 baseline captures</title>
+<style>
+body{font:16px system-ui;margin:24px;background:#eee;color:#111}label{margin-right:16px}img{display:block;max-width:100%;height:auto;margin-top:20px;border:1px solid #999}p{max-width:75ch}select{font:inherit}
+</style>
+<h1>Phase 0 baseline captures</h1>
+<p>Windows x64, inherited Spotifast UI at 995c768. No redesign. Demo sample data and Picsum artwork. The narrow queue layout has clipping and overlapping controls. MilkDrop is a separate native child capture, without real playback.</p>
+<label>Surface <select id="surface"><option value="app">Playlist and queue</option><option value="winamp">Winamp</option><option value="milkdrop-child">MilkDrop child</option></select></label>
+<label>Theme <select id="theme"><option>dark</option><option>light</option></select></label>
+<label>Window <select id="size"><option value="desktop">1280 × 800</option><option value="narrow">760 × 800</option></select></label>
+<img id="capture" src="evidence/desktop-dark.png" alt="Desktop dark baseline playlist and queue">
+<script>
+const surface=document.querySelector('#surface'),theme=document.querySelector('#theme'),size=document.querySelector('#size'),capture=document.querySelector('#capture');
+function update(){const app=surface.value==='app';theme.disabled=size.disabled=!app;capture.src='evidence/'+(app?size.value+'-'+theme.value:surface.value)+'.png';capture.alt=app?size.options[size.selectedIndex].text+' '+theme.value+' baseline playlist and queue':surface.options[surface.selectedIndex].text+' native baseline';}
+for(const control of [surface,theme,size])control.addEventListener('change',update);
+</script>
+</html>

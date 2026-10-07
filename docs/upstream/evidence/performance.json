@@ -1,0 +1,39 @@
+{
+  "DateUtc": "2026-10-07T07:26:02.5428253Z",
+  "Executable": "<repo>\\target\\release\\spotifast.exe",
+  "Sha256": "D577108950CE9F3141FCDB64297674C5A1DB744A780F84E69A4CA8AE65B87B41",
+  "LogicalProcessors": 16,
+  "SoakSeconds": 600,
+  "Startup": [
+    {
+      "Run": 0,
+      "Kind": "Fresh profile, OS cache uncontrolled",
+      "WindowReadyMs": 157.33,
+      "WindowVisible": true
+    },
+    {
+      "Run": 1,
+      "Kind": "Warm profile",
+      "WindowReadyMs": 45.45,
+      "WindowVisible": true
+    },
+    {
+      "Run": 2,
+      "Kind": "Warm profile",
+      "WindowReadyMs": 36.0,
+      "WindowVisible": true
+    },
+    {
+      "Run": 3,
+      "Kind": "Warm profile",
+      "WindowReadyMs": 47.66,
+      "WindowVisible": true
+    }
+  ],
+  "CpuMean": 0.016758333333333333,
+  "WorkingSetMin": 179.043,
+  "WorkingSetMax": 200.164,
+  "PrivateFirst": 293.648,
+  "PrivateLast": 288.57,
+  "Caveat": "Release demo, simulated paused local state, no Spotify engine/audio decode. Window handle is not first paint. Fresh profile is not reboot-cold. No memory-leak conclusion from static short soak."
+}

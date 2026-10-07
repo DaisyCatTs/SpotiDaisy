@@ -1,0 +1,7 @@
+
+running 2 tests
+test apply_update_runs_the_helper_before_the_app ... ok
+test update_flags_are_intercepted_before_the_arguments_are_parsed ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+

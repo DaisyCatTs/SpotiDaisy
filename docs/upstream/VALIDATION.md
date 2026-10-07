@@ -1,0 +1,159 @@
+# Phase 0 validation and performance evidence
+
+Audit date: 2026-10-07. No runtime source or dependency versions changed.
+This is a baseline of successes **and failures**, not a claim of green CI.
+
+## Environment and build setup
+
+Windows 11 Pro 25H2, x86_64; Ryzen 7 9850X3D (8 cores / 16 logical processors),
+approximately 32 GB RAM, Radeon RX 9070 XT, AMD OpenGL 3.3 driver
+`26.9.1.260826`. Two 2560x1440 displays at 240/180 Hz were present. C: had
+approximately 28 GiB free initially; cold Cargo builds materially reduced that.
+No compiler flags were varied from repository profiles/configuration.
+
+The pinned Rust 1.98.0 toolchain was initially missing and rustup installed it.
+Plain Cargo was used because mise/mbx were not installed. Target output stayed
+in this checkout's target directory; no shared target and no cargo clean.
+
+Native prerequisites: Visual Studio Community 2026 18.9.2, its x64 developer
+environment, bundled CMake/Ninja, `CMAKE_GENERATOR=Ninja`,
+`VCPKG_INSTALLATION_ROOT=C:/dev/vcpkg`, `glew:x64-windows-static` installed with
+vcpkg, and temporary libclang 18.1.1 from the Python libclang wheel. The initial
+VS shell setup emitted a missing-vswhere warning; subsequent setup added the
+Installer directory to PATH. It did not change repository compiler settings.
+
+Python launcher `py` selects Python 3.14.6; `python.exe` on PATH is a Windows
+Store alias. Linux packaging/docs checks additionally used Ubuntu WSL with Ruby,
+Ruby development headers and build tools installed. Bundler/Jekyll dependencies
+were staged under `.cache/phase0`, not added to application dependencies.
+Bundler added a checksum to Gemfile.lock during setup; the original bytes/content
+were restored and that incidental lockfile change is not part of Phase 0.
+
+## Executed checks
+
+| Command / scope | Outcome | Evidence |
+| --- | --- | --- |
+| `cargo fmt --all --check` | Pass | `evidence/fmt.txt` (empty successful output) |
+| Initial `cargo test --locked --all-targets` | Exit 101, missing VCPKG_INSTALLATION_ROOT | `evidence/test-default.txt` |
+| Configured `cargo test --locked --all-targets` | Exit 101; library 939 passed, 1 ignored; bin 12, branding 3, localization 1 passed; updater test executable cannot launch (740) | `evidence/test-default-configured.txt` |
+| `cargo test --locked --all-targets --all-features` | Exit 101; library 962 passed, 1 ignored; bin 13, branding 3, localization 1 passed; same updater launch failure | `evidence/test-all.txt` |
+| `cargo test --locked --all-features --doc` | Pass, zero doc tests | `evidence/test-doc.txt` |
+| `cargo clippy --locked --all-targets -- -D warnings` | Pass | `evidence/clippy-default.txt` |
+| `cargo clippy --locked --all-targets --all-features -- -D warnings` | Pass | `evidence/clippy-all.txt` |
+| `RUSTDOCFLAGS=-D warnings cargo doc --locked --all-features --no-deps` | Pass | `evidence/rustdoc.txt` |
+| `cargo build --locked --all-features` | Pass, development demo and MilkDrop | `evidence/build-demo.txt` |
+| `cargo build --locked --release --features demo` | Pass, optimized demo and MilkDrop, 3m23s cold build | `evidence/build-release-demo.txt` |
+| `cargo build --locked --release` | Pass, production app without demo | `evidence/build-release.txt` |
+| Final format and branding tests | Pass, 3 branding tests | `evidence/fmt-final.txt`, `evidence/branding-final.txt` |
+| Native Credential Manager dummy round-trip, exact ignored test | Pass, 1 test | `evidence/native-store.txt` |
+| Updater default test executable copied to neutral `phase0-check.exe` | Both tests pass; diagnostic experiment only | `evidence/update-launch-renamed.txt` |
+| `py packaging/flatpak/test-metainfo.py` | Pass, 4 tests | `evidence/metainfo.txt` |
+| `py packaging/test-release-names.py` | Pass, 4 tests | `evidence/release-names.txt` |
+| `py packaging/test-launchers.py` on Windows | Fail: missing Unix true/Ruby and path semantics | `evidence/launchers-windows.txt` |
+| Launcher tests under WSL, checkout and Git archive | Fail: CRLF shell files plus Flatpak mismatch | `evidence/launchers-wsl-configured.txt`, `evidence/launchers-lf-baseline.txt` |
+| Launcher tests under WSL after normalizing only scratch shell files | Fail: 2 Flatpak StartupWMClass assertions; other test methods pass | `evidence/launchers-normalized-scratch.txt` |
+| `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt` |
+| `cargo deny check advisories` | Fail: 4 vulnerabilities, 1 unmaintained warning/error | `evidence/advisories.txt` |
+| `cargo deny check` without a repository policy | Fail: advisories and default license policy rejects common licenses; bans/sources checks completed with warnings | See SECURITY_AND_DEPENDENCIES.md; generic output not retained as a multi-megabyte artifact |
+
+Some integration targets ran zero tests on Windows due to platform cfgs. The
+ignored native-store test was run separately and passed. No tests were deleted,
+skipped, weakened or renamed in the repository to conceal failures.
+
+The neutral-name experiment supports Windows installer-name heuristics as the
+cause of error 740. It is not a passing result for the documented Cargo command.
+The controlled launcher experiment isolates a genuine inherited Flatpak
+`StartupWMClass=spotifast` versus expected `rocks.spotifast.Spotifast` mismatch.
+Git blobs use LF; Windows `core.autocrlf=true` gives the checkout and git archive
+CRLF. Only disposable scratch shell files were normalized for diagnosis.
+
+## Native runtime and visual baseline
+
+Ran the built app in isolated demo profiles, without restoring Spotify grants.
+Demo uses simulated Spotify data but downloads placeholder artwork from Picsum.
+It is not a fully network-free run or a real audio decode test.
+
+- Matched 1280x800 and 760x800 dark/light playlist-with-queue captures.
+- Built-in Winamp capture, inspected as rendered.
+- MilkDrop host capture and a real separate projectM child process confirmed.
+  Captured the child's 640x480 OpenGL window using PrintWindow and inspected the
+  rendered visualization. This verifies native rendering/process startup, not
+  audio synchronization under authenticated playback or preset stress.
+- AMD renderer initialization and successful captures recorded in demo logs.
+
+See [the screenshot index](screenshots.html). At 760x800, the open queue leaves
+the workspace extremely narrow; header/rows truncate and filter/play controls
+overlap. Navigation/search controls crowd together. This is an existing defect
+or design limitation, not fixed in Phase 0. Desktop 1280x800 and Winamp render.
+No claim of exhaustive accessibility, all interaction states or all sizes.
+
+## Performance method
+
+`measure-baseline.ps1` launches the optimized **demo** four times using an
+isolated profile. Time is process launch to a nonzero native main-window handle,
+not first paint or interactive readiness. Run zero uses a fresh profile, but OS
+filesystem/GPU caches are uncontrolled; it must not be called reboot-cold.
+The last run samples simulated paused local UI every five seconds for ten
+minutes after a ten-second settling period. It does not run librespot audio.
+CPU is normalized to all 16 logical processors, like total-machine CPU, and
+both working set and private committed memory are recorded.
+
+`measure-process.ps1` samples the user's already-running installed Spotifast
+without changing settings, login or playback. The user confirmed playback and
+then paused it on request. Each sample lasts approximately two minutes.
+Installed binary reports 0.12.0 and hash
+`E4867B8EB54021732126B6F0C906702B31D2FFC7A6E725E3DCB121B2F478FE01`.
+Its exact build commit is not proven by the version; do not equate it with the
+checkout's post-release baseline. No credentials, logs or track metadata from
+the installed app were read. Playback-locality relies on the requested user
+setup, not an instrumented output-device probe.
+
+The installed playback CSV retains the initial label
+`installed-session-unconfirmed`; playback was subsequently confirmed by the
+user during that sample. Its mean CPU was 0.24556%, maximum 0.7319%, working
+set 244.789-249.625 MiB; private commit grew 379.676 to 385.582 MiB. This brief
+growth is not evidence of a leak or a plateau.
+
+Installed paused sample: mean CPU 0.01871%, maximum 0.1953%, working set
+241.188-244.910 MiB, private commit 377.391 to 378.254 MiB. The user confirmed
+the paused state. See `evidence/installed-paused.json` and its CSV. Demo metrics
+are recorded in performance.json. Fresh-profile window readiness was 157.33 ms;
+warm runs were 45.45, 36.00 and 47.66 ms. Ten-minute demo mean CPU was
+0.01676%, working set 179.043-200.164 MiB, private commit 293.648 to
+288.570 MiB. These are proxy measurements under the limitations above.
+
+Production dumpbin imports contain no VCRUNTIME, MSVCP or api-ms-win-crt DLL
+imports, consistent with the configured static CRT. This is not installer QA.
+Evidence text paths were sanitized to placeholders; measurements and hashes
+were preserved.
+
+## CI and platform limits
+
+Fork API: Actions enabled, allowed actions all, zero registered workflows and
+zero runs. Contents API confirms ci.yml exists on main; explicit fork dispatch
+returns 404. A fresh dev policy/CI push did not register or start a workflow.
+The collaborative browser, unsigned-in, also shows zero runs. The exact cause
+is unproven; maintainer-side Actions activation or GitHub support may be needed.
+
+One initial `gh workflow run` implicitly resolved upstream and was denied 403;
+no upstream workflow was started. Subsequent commands explicitly targeted the
+Daisy repository. Main has required check names but none has a verified fork
+result. CI is blocked, not green. No release, docs deployment, package publish
+or stable-main merge was performed.
+
+Windows x64 was built and run. WSL tested packaging scripts and the docs site,
+not a Linux GUI/audio build. macOS, Windows ARM, Linux native GUI/audio, Nix,
+Inno installer validation, package installation, signing/notarization and
+release artifact attribution were not executed here.
+
+## Remaining measurement gaps
+
+True cold startup (reboot or controlled cache state), authenticated startup at
+this exact source commit, authenticated playback CPU at this exact build, and
+multi-hour/day browsing/playback soak remain unvalidated. A ten-minute static
+demo cannot prove cache bounds, 10k/100k library behavior or memory leak absence.
+MilkDrop/EQ/device reconnect/gaplessness under real audio load also need dedicated
+later validation. These gaps must remain visible in the master checklist.
+
+Disposable QA scratch remains ignored under .cache/phase0 because automatic
+approval review rejected the recursive cleanup command. It is not committed.

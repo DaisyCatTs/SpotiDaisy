@@ -1,0 +1,11 @@
+   Compiling spotifast v0.12.0 (<repo>)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.62s
+     Running tests\branding.rs (target\debug\deps\branding-5e0e4c406409d559.exe)
+
+running 3 tests
+test existing_preferences_and_custom_connect_names_survive_a_save ... ok
+test the_command_reports_its_name_and_passes_the_update_version_check ... ok
+test no_file_carries_the_old_name ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.50s
+

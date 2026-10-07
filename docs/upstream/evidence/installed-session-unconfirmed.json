@@ -1,0 +1,15 @@
+{
+  "Label": "installed-session-unconfirmed",
+  "Binary": "<home>\\AppData\\Local\\Programs\\Spotifast\\spotifast.exe",
+  "Sha256": "E4867B8EB54021732126B6F0C906702B31D2FFC7A6E725E3DCB121B2F478FE01",
+  "Version": "spotifast 0.12.0",
+  "LogicalProcessors": 16,
+  "Samples": 60,
+  "CpuMean": 0.2455583333333333,
+  "CpuMax": 0.7319,
+  "WorkingSetMin": 244.789,
+  "WorkingSetMax": 249.625,
+  "PrivateFirst": 379.676,
+  "PrivateLast": 385.582,
+  "Caveat": "Existing user-owned installed process; state and local-vs-remote playback require user confirmation. No credential access or process control."
+}

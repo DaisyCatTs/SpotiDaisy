@@ -1,0 +1,27 @@
+   Compiling tokio v1.53.1
+   Compiling linereader v0.4.0
+   Compiling polib v0.3.0
+   Compiling fastframe-i18n v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+   Compiling spotifast v0.12.0 (<repo>)
+   Compiling tokio-util v0.7.19
+   Compiling tokio-rustls v0.26.4
+   Compiling async-compression v0.4.43
+   Compiling tower v0.5.3
+   Compiling tokio-stream v0.1.19
+   Compiling tokio-tungstenite v0.28.0
+   Compiling h2 v0.4.19
+   Compiling tower-http v0.6.11
+   Compiling hyper v1.11.0
+   Compiling hyper-util v0.1.20
+   Compiling hyper-rustls v0.27.9
+   Compiling reqwest v0.12.28
+   Compiling hyper-proxy2 v0.1.0 (https://github.com/crmne/hyper-proxy2?rev=efca4811371ddae81c06be168de54194938d70b1#efca4811)
+   Compiling oauth2 v5.0.0
+   Compiling fastframe-update v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+   Compiling librespot-oauth v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+   Compiling librespot-core v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+   Compiling librespot-metadata v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+   Compiling librespot-audio v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+   Compiling librespot-playback v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+   Compiling librespot-connect v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 40.89s

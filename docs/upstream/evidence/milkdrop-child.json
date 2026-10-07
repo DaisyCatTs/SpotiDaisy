@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "conhost.exe",
+    "ProcessId": 17816,
+    "ParentProcessId": 17916,
+    "CommandLine": "\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4"
+  },
+  {
+    "Name": "spotifast.exe",
+    "ProcessId": 18636,
+    "ParentProcessId": 17916,
+    "CommandLine": "\"<repo>\\target\\debug\\spotifast.exe\" --milkdrop-child --milkdrop-shm <home>\\AppData\\Local\\Temp\\spotifast-milkdrop-17916.pcm --milkdrop-presets <repo>/.cache/phase0/milkdrop-live\\config\\milkdrop --milkdrop-size 640x480 --milkdrop-fps 60 --milkdrop-seconds 10 --milkdrop-scale 1"
+  }
+]

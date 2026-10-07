@@ -1,0 +1,77 @@
+spotifast v0.12.0 (<repo>)
+├── aes v0.8.4
+├── anyhow v1.0.104
+├── base64 v0.22.1
+├── clap v4.6.6
+├── ctr v0.9.2
+├── directories v6.0.0
+├── eframe v0.36.1 (https://github.com/crmne/egui?rev=ba6790fe7cf46e58e8d27ce1524cbfdee745e938#ba6790fe)
+├── egui v0.36.1 (https://github.com/crmne/egui?rev=ba6790fe7cf46e58e8d27ce1524cbfdee745e938#ba6790fe)
+├── egui_extras v0.36.1 (https://github.com/crmne/egui?rev=ba6790fe7cf46e58e8d27ce1524cbfdee745e938#ba6790fe)
+├── fastframe-audio v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-emoji v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-fonts v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-i18n v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-icons v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-instance v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-log v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-macos v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-now-playing v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-scroll v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-shell v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-text v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-theme v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-tray v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── fastframe-update v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+├── flate2 v1.1.9
+├── glutin v0.32.3
+│   [build-dependencies]
+├── glutin-winit v0.5.0
+│   [build-dependencies]
+├── hmac v0.12.1
+├── http v1.5.0
+├── hyper-util v0.1.20
+├── image v0.25.10
+├── jiff v0.2.35
+├── keyring-core v1.0.0
+├── librespot-connect v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+├── librespot-core v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+│   [build-dependencies]
+├── librespot-metadata v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+├── librespot-playback v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+├── librespot-protocol v0.8.0 (https://github.com/crmne/librespot?rev=23fc42cff37848e51f0d8eaefad1a93941b71e59#23fc42cf)
+│   [build-dependencies]
+├── log v0.4.34
+├── mdns-sd v0.21.0
+├── memmap2 v0.9.11
+├── open v5.4.2
+├── pbkdf2 v0.12.2
+├── percent-encoding v2.3.2
+├── projectm-sys v1.2.3 (https://github.com/dennisgr7/projectm-rs?rev=1ef6df1c20247a3a5800c625e46262330f93bbd6#1ef6df1c)
+│   [build-dependencies]
+├── protobuf v3.7.2
+├── rand v0.9.5
+├── raw-window-handle v0.6.2
+├── reqwest v0.12.28
+├── rfd v0.17.2
+├── rodio v0.21.1
+├── serde v1.0.229
+├── serde_json v1.0.151
+├── sha1 v0.10.7
+├── sha2 v0.10.9
+├── skrifa v0.44.0
+├── thiserror v2.0.20
+├── tiny-skia v0.11.4
+├── tokio v1.53.1
+├── unicode-bidi v0.3.18
+├── urlencoding v2.1.3
+├── windows-native-keyring-store v1.1.0
+├── windows-sys v0.60.2
+└── winit v0.30.13 (https://github.com/crmne/winit?rev=ed7caa9023f10b397f5b6ec8284a840cbd8a6f65#ed7caa90)
+    [build-dependencies]
+[build-dependencies]
+├── fastframe-i18n v0.4.1 (https://github.com/crmne/fastframe?tag=v0.4.1#23d87e04)
+└── winresource v0.1.31
+[dev-dependencies]
+├── polib v0.3.0
+└── tokio v1.53.1 (*)

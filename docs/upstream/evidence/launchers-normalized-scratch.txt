@@ -1,0 +1,35 @@
+.FF..
+======================================================================
+FAIL: test_flatpak_install_commands_keep_app_id_and_icon_aligned (__main__.LauncherInstallTest.test_flatpak_install_commands_keep_app_id_and_icon_aligned) (manifest='rocks.spotifast.Spotifast.yml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/.cache/phase0/lf-baseline/packaging/test-launchers.py", line 104, in test_flatpak_install_commands_keep_app_id_and_icon_aligned
+    self.check_launcher(root / "app", config["id"], config["id"], config["id"])
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/.cache/phase0/lf-baseline/packaging/test-launchers.py", line 63, in check_launcher
+    self.assertEqual(entry["StartupWMClass"], window_class)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'spotifast' != 'rocks.spotifast.Spotifast'
+- spotifast
++ rocks.spotifast.Spotifast
+
+
+======================================================================
+FAIL: test_flatpak_install_commands_keep_app_id_and_icon_aligned (__main__.LauncherInstallTest.test_flatpak_install_commands_keep_app_id_and_icon_aligned) (manifest='rocks.spotifast.Spotifast.bundle.yml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/.cache/phase0/lf-baseline/packaging/test-launchers.py", line 104, in test_flatpak_install_commands_keep_app_id_and_icon_aligned
+    self.check_launcher(root / "app", config["id"], config["id"], config["id"])
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/.cache/phase0/lf-baseline/packaging/test-launchers.py", line 63, in check_launcher
+    self.assertEqual(entry["StartupWMClass"], window_class)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'spotifast' != 'rocks.spotifast.Spotifast'
+- spotifast
++ rocks.spotifast.Spotifast
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.876s
+
+FAILED (failures=2)

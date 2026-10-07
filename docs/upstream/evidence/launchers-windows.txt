@@ -1,0 +1,188 @@
+EEEEcheck: line 1: : No such file or directory
+Fcheck: line 1: : No such file or directory
+Fcheck: line 1: : No such file or directory
+FE
+======================================================================
+ERROR: test_aur_payloads_install_the_launcher (__main__.LauncherInstallTest.test_aur_payloads_install_the_launcher) (package='spotifast')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 83, in test_aur_payloads_install_the_launcher
+    payload(root / "src" / relative)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\packaging\test-launchers.py", line 34, in payload
+    shutil.copyfile(shutil.which("true"), root / name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 292, in copyfile
+    if _samefile(src, dst):
+       ~~~~~~~~~^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 269, in _samefile
+    return os.path.samefile(src, dst)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "<frozen genericpath>", line 136, in samefile
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+
+======================================================================
+ERROR: test_aur_payloads_install_the_launcher (__main__.LauncherInstallTest.test_aur_payloads_install_the_launcher) (package='spotifast-bin')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 83, in test_aur_payloads_install_the_launcher
+    payload(root / "src" / relative)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\packaging\test-launchers.py", line 34, in payload
+    shutil.copyfile(shutil.which("true"), root / name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 292, in copyfile
+    if _samefile(src, dst):
+       ~~~~~~~~~^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 269, in _samefile
+    return os.path.samefile(src, dst)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "<frozen genericpath>", line 136, in samefile
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+
+======================================================================
+ERROR: test_aur_payloads_install_the_launcher (__main__.LauncherInstallTest.test_aur_payloads_install_the_launcher) (package='spotifast-git')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 83, in test_aur_payloads_install_the_launcher
+    payload(root / "src" / relative)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>\packaging\test-launchers.py", line 34, in payload
+    shutil.copyfile(shutil.which("true"), root / name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 292, in copyfile
+    if _samefile(src, dst):
+       ~~~~~~~~~^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\shutil.py", line 269, in _samefile
+    return os.path.samefile(src, dst)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "<frozen genericpath>", line 136, in samefile
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+
+======================================================================
+ERROR: test_flatpak_install_commands_keep_app_id_and_icon_aligned (__main__.LauncherInstallTest.test_flatpak_install_commands_keep_app_id_and_icon_aligned)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 94, in test_flatpak_install_commands_keep_app_id_and_icon_aligned
+    config = yaml(ROOT / "packaging/flatpak" / manifest)
+  File "<repo>\packaging\test-launchers.py", line 20, in yaml
+    return json.loads(subprocess.check_output([
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+        "ruby", "-rjson", "-ryaml", "-e",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "puts JSON.generate(YAML.safe_load_file(ARGV.fetch(0), aliases: false))", str(path),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ], text=True))
+    ^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 473, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1553, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+======================================================================
+ERROR: test_native_manifest_installs_the_launcher_and_icon (__main__.LauncherInstallTest.test_native_manifest_installs_the_launcher_and_icon)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 107, in test_native_manifest_installs_the_launcher_and_icon
+    config = yaml(ROOT / "native-packages.yaml")
+  File "<repo>\packaging\test-launchers.py", line 20, in yaml
+    return json.loads(subprocess.check_output([
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+        "ruby", "-rjson", "-ryaml", "-e",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "puts JSON.generate(YAML.safe_load_file(ARGV.fetch(0), aliases: false))", str(path),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ], text=True))
+    ^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 473, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1553, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+======================================================================
+FAIL: test_generated_aur_versions_start_at_the_requested_release (__main__.LauncherInstallTest.test_generated_aur_versions_start_at_the_requested_release) (package='spotifast')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 53, in test_generated_aur_versions_start_at_the_requested_release
+    self.assertEqual(version, "9.8.7")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '' != '9.8.7'
++ 9.8.7
+
+
+======================================================================
+FAIL: test_generated_aur_versions_start_at_the_requested_release (__main__.LauncherInstallTest.test_generated_aur_versions_start_at_the_requested_release) (package='spotifast-bin')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 53, in test_generated_aur_versions_start_at_the_requested_release
+    self.assertEqual(version, "9.8.7")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '' != '9.8.7'
++ 9.8.7
+
+
+======================================================================
+FAIL: test_generated_aur_versions_start_at_the_requested_release (__main__.LauncherInstallTest.test_generated_aur_versions_start_at_the_requested_release) (package='spotifast-git')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>\packaging\test-launchers.py", line 53, in test_generated_aur_versions_start_at_the_requested_release
+    self.assertEqual(version, "9.8.7")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '' != '9.8.7'
++ 9.8.7
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 11.515s
+
+FAILED (failures=3, errors=5)

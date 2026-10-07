@@ -1,0 +1,100 @@
+Computing installation plan...
+The following packages will be built and installed:
+  * egl-registry:x64-windows-static@2025-05-27
+    glew:x64-windows-static@2.3.1
+  * opengl:x64-windows-static@2022-12-04#3
+  * opengl-registry:x64-windows-static@2026-08-03
+Additional packages (*) will be modified to complete this operation.
+Detecting compiler hash for triplet x64-windows-static...
+Compiler found: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
+Restored 0 package(s) from <home>\AppData\Local\vcpkg\archives in 304 us. Use --debug to see more details.
+Installing 1/4 egl-registry:x64-windows-static@2025-05-27...
+egl-registry:x64-windows-static@2025-05-27 package ABI: a4eb18ed2d0d452f52fa5813a137cf9144938e3e8307b04e22b7cc8a4e7bbf0f
+Building egl-registry:x64-windows-static@2025-05-27...
+Downloading https://github.com/KhronosGroup/EGL-Registry/archive/3ae2b7c48690d2ce13cc6db3db02dfc0572be65e.tar.gz -> KhronosGroup-EGL-Registry-3ae2b7c48690d2ce13cc6db3db02dfc0572be65e.tar.gz
+Successfully downloaded KhronosGroup-EGL-Registry-3ae2b7c48690d2ce13cc6db3db02dfc0572be65e.tar.gz
+-- Extracting source C:/dev/vcpkg/downloads/KhronosGroup-EGL-Registry-3ae2b7c48690d2ce13cc6db3db02dfc0572be65e.tar.gz
+-- Using source at C:/dev/vcpkg/buildtrees/egl-registry/src/c0572be65e-4257a9ad9b.clean
+-- Installing: C:/dev/vcpkg/packages/egl-registry_x64-windows-static/share/egl-registry/copyright
+-- Performing post-build validation
+Starting submission of egl-registry:x64-windows-static@2025-05-27 to 1 binary cache(s) in the background
+Elapsed time to handle egl-registry:x64-windows-static: 935 ms
+Installing 2/4 opengl-registry:x64-windows-static@2026-08-03...
+opengl-registry:x64-windows-static@2026-08-03 package ABI: 9e5a271186838eaabf8de87379e947a63089d9f5d30d70137df69b8ad0da6e37
+Building opengl-registry:x64-windows-static@2026-08-03...
+Downloading https://github.com/KhronosGroup/OpenGL-Registry/archive/e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef.tar.gz -> KhronosGroup-OpenGL-Registry-e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef.tar.gz
+Successfully downloaded KhronosGroup-OpenGL-Registry-e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef.tar.gz
+-- Extracting source C:/dev/vcpkg/downloads/KhronosGroup-OpenGL-Registry-e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef.tar.gz
+-- Using source at C:/dev/vcpkg/buildtrees/opengl-registry/src/4b1fec41ef-a126ad0aa2.clean
+-- Installing: C:/dev/vcpkg/packages/opengl-registry_x64-windows-static/share/opengl-registry/copyright
+-- Performing post-build validation
+Starting submission of opengl-registry:x64-windows-static@2026-08-03 to 1 binary cache(s) in the background
+Elapsed time to handle opengl-registry:x64-windows-static: 10 s
+Completed submission of egl-registry:x64-windows-static@2025-05-27 to 1 binary cache(s) in 36.8 ms
+Installing 3/4 opengl:x64-windows-static@2022-12-04#3...
+opengl:x64-windows-static@2022-12-04#3 package ABI: ed266dc4e19fa8bd484e9140021198ddf9c72e15906a2c4a0b0f480f9c269d4f
+Building opengl:x64-windows-static@2022-12-04#3...
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/include/GL/gl.h
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/include/GL/glu.h
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/lib/OpenGL32.Lib
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/lib/GlU32.Lib
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/debug/lib/OpenGL32.Lib
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/debug/lib/GlU32.Lib
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/opengl_x64-windows-static/lib/pkgconfig/glu.pc
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/opengl_x64-windows-static/lib/pkgconfig/opengl.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/dev/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/opengl_x64-windows-static/debug/lib/pkgconfig/glu.pc
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/opengl_x64-windows-static/debug/lib/pkgconfig/opengl.pc
+-- Installing: C:/dev/vcpkg/packages/opengl_x64-windows-static/share/opengl/usage
+-- Performing post-build validation
+Starting submission of opengl:x64-windows-static@2022-12-04#3 to 1 binary cache(s) in the background
+Elapsed time to handle opengl:x64-windows-static: 102 ms
+Installing 4/4 glew:x64-windows-static@2.3.1...
+glew:x64-windows-static@2.3.1 package ABI: 9a8610a3a296adc97734c8f3abb9c91dfe171d371c675f085dabcbfb7252d9f7
+Building glew:x64-windows-static@2.3.1...
+Downloading https://github.com/nigels-com/glew/releases/download/glew-2.3.1/glew-2.3.1.tgz -> glew-2.3.1.tgz
+Successfully downloaded glew-2.3.1.tgz
+-- Extracting source C:/dev/vcpkg/downloads/glew-2.3.1.tgz
+-- Applying patch fix-LNK2019.patch
+-- Applying patch trim-build.diff
+-- Using source at C:/dev/vcpkg/buildtrees/glew/src/glew-8cf78e348c.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/glew_x64-windows-static/lib/pkgconfig/glew.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/dev/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/dev/vcpkg/packages/glew_x64-windows-static/debug/lib/pkgconfig/glew.pc
+-- Installing: C:/dev/vcpkg/packages/glew_x64-windows-static/share/glew/vcpkg-cmake-wrapper.cmake
+-- Installing: C:/dev/vcpkg/packages/glew_x64-windows-static/share/glew/copyright
+-- Performing post-build validation
+Starting submission of glew:x64-windows-static@2.3.1 to 1 binary cache(s) in the background
+Elapsed time to handle glew:x64-windows-static: 7.1 s
+Total install time: 18 s
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Some packages did not declare an SPDX license. Check the `copyright` file for each package for more information about their licensing.
+Packages installed in this vcpkg installation declare the following licenses:
+Apache-2.0
+glew provides CMake targets:
+
+  # Legacy CMake find module
+  find_package(GLEW REQUIRED)
+  target_link_libraries(main PRIVATE GLEW::GLEW)
+
+  # Modern CMake config package
+  find_package(GLEW CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE GLEW::GLEW)
+
+glew provides pkg-config modules:
+
+  # The OpenGL Extension Wrangler library
+  glew
+
+Completed submission of opengl-registry:x64-windows-static@2026-08-03 to 1 binary cache(s) in 134 ms
+Completed submission of opengl:x64-windows-static@2022-12-04#3 to 1 binary cache(s) in 25.9 ms
+Waiting for 1 remaining binary cache submissions...
+Completed submission of glew:x64-windows-static@2.3.1 to 1 binary cache(s) in 181 ms (1/1)
+All requested installations completed successfully in: 18 s

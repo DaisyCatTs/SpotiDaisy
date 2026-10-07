@@ -1,0 +1,5 @@
+"Run","Kind","WindowReadyMs","WindowVisible"
+"0","Fresh profile, OS cache uncontrolled","157.33","True"
+"1","Warm profile","45.45","True"
+"2","Warm profile","36","True"
+"3","Warm profile","47.66","True"

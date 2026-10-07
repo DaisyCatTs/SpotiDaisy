@@ -1,0 +1,18 @@
+[2026-10-07T07:11:11Z INFO spotifast] Starting spotifast 0.12.0 on windows (x86_64)
+[2026-10-07T07:11:11Z INFO spotifast::entrypoint] OpenGL renderer: AMD Radeon RX 9070 XT; vendor: ATI Technologies Inc.; version: 3.3.0 Core Profile Context 26.9.1.260826
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] han fallback: Microsoft YaHei UI (C:\WINDOWS\Fonts\msyh.ttc, face 1), scale 1.00, baseline -0.017 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] kana fallback: Yu Gothic UI (C:\WINDOWS\Fonts\YuGothM.ttc, face 1), scale 1.00, baseline -0.050 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] hangul fallback: Malgun Gothic (C:\WINDOWS\Fonts\malgun.ttf, face 0), scale 1.00, baseline -0.060 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] arabic fallback: Segoe UI (C:\WINDOWS\Fonts\segoeui.ttf, face 0), scale 1.15, baseline -0.050 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] hebrew fallback: Lucida Sans Unicode (C:\WINDOWS\Fonts\l_10646.ttf, face 0), scale 1.00, baseline +0.035 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] thai fallback: Leelawadee UI (C:\WINDOWS\Fonts\LeelawUI.ttf, face 0), scale 1.00, baseline -0.050 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] myanmar fallback: Myanmar Text (C:\WINDOWS\Fonts\mmrtext.ttf, face 0), scale 1.00, baseline +0.258 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] devanagari fallback: Nirmala UI (C:\WINDOWS\Fonts\Nirmala.ttc, face 0), scale 1.00, baseline -0.050 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] armenian fallback: Comic Sans MS (C:\WINDOWS\Fonts\comic.ttf, face 0), scale 1.00, baseline -0.042 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] ethiopic fallback: Ebrima (C:\WINDOWS\Fonts\ebrima.ttf, face 0), scale 1.00, baseline -0.036 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] cherokee fallback: Gadugi (C:\WINDOWS\Fonts\gadugi.ttf, face 0), scale 1.00, baseline -0.050 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] yi fallback: Microsoft Yi Baiti (C:\WINDOWS\Fonts\msyi.ttf, face 0), scale 1.00, baseline +0.018 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] javanese fallback: Javanese Text (C:\WINDOWS\Fonts\javatext.ttf, face 0), scale 1.00, baseline +0.249 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] math fallback: Cambria Math (C:\WINDOWS\Fonts\cambria.ttc, face 1), scale 1.00, baseline +0.172 em
+[2026-10-07T07:11:11Z INFO fastframe_fonts::system] enclosed fallback: Segoe UI Symbol (C:\WINDOWS\Fonts\seguisym.ttf, face 0), scale 1.00, baseline -0.050 em
+[2026-10-07T07:11:13Z INFO spotifast::entrypoint] wrote 760x800 to <repo>/docs/upstream/evidence/narrow-light.png

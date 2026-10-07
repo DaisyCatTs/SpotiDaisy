@@ -1,0 +1,7 @@
+Configuration file: <repo>/docs/_config.yml
+            Source: <repo>/docs
+       Destination: <repo>/docs/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 5.142 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.

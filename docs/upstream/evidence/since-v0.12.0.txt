@@ -1,0 +1,11 @@
+995c768 Fix playback artifacts and respond to held slider presses (#686)
+a3e95f8 Stop a multi-song drag within its playlist from adding copies (#684)
+5d77caf Bring the Windows on ARM build level with x64 (#682)
+2590e33 docs: improve README navigation and showcase existing visuals (#677)
+6d970ac Name a song radio opened from a list after its song (#659)
+4ba8d98 Spin the transport button while the next track loads (#654)
+7048219 Name Carmine Paolino as copyright holder in the installers
+34802e2 Cut the README down and point it at the docs
+7eae8bb Add interactive MacBook notch Now Playing overlay widget for macOS (#528)
+556eda6 Show pause on the cards and sidebar covers of the playing context (#655)
+457cb4a Point the website at Spotifast 0.12.0

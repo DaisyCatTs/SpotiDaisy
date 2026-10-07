@@ -1,0 +1,281 @@
+2026-10-07 07:06:04 [WARN] unable to find a config path, falling back to default config
+error[vulnerability]: Quadratic run time when checking a start tag for duplicate attribute names
+    ┌─ <repo>/Cargo.lock:433:1
+    │
+433 │ quick-xml 0.38.4 registry+https://github.com/rust-lang/crates.io-index
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ security vulnerability detected
+    │
+    ├ ID: RUSTSEC-2026-0194
+    ├ Advisory: https://rustsec.org/advisories/RUSTSEC-2026-0194
+    ├ `BytesStart::attributes()` returns an `Attributes` iterator which, by default
+      (`with_checks(true)`), rejects a start tag that repeats an attribute name. For
+      each attribute yielded, the iterator compared the new name against every name
+      seen so far in the same tag using a linear scan, so a start tag with `N`
+      distinct attribute names cost `O(N²)` byte comparisons. There was no bound on
+      `N` other than the size of the buffered start tag.
+      
+      ## Impact
+      
+      Any code that parses untrusted XML and iterates a start tag's attributes with
+      the default duplicate check enabled can be made to spend CPU time quadratic in
+      the number of attributes on a single tag. Because the check is pure computation
+      with no `.await`/I/O, an I/O-based timeout on the consumer (for example a read
+      or request timeout) cannot interrupt it while it runs.
+      
+      Measured cost of a single start tag, release build:
+      
+      | Attributes on one tag | Time |
+      |---|---|
+      | 80,000  | ~6 s   |
+      | 800,000 | ~10 min |
+      
+      The cost grows with the square of the attribute count, so a start tag of a few
+      tens of megabytes can stall a parsing thread for hours. No memory is exhausted
+      and the parser does not crash; the effect is CPU exhaustion on the thread doing
+      the parsing: a single crafted start tag can pin a CPU core for minutes to hours,
+      denying service to that worker. A deployment that places a wall-clock bound on
+      parsing, or confines it to a non-critical thread, may consider the availability
+      impact lower.
+      
+      ## Affected code paths
+      
+      * `BytesStart::attributes()` / `Attributes` iterated with checks enabled (the
+        default), and `BytesStart::try_get_attribute`.
+      * `NsReader`, which resolves namespaces by iterating a tag's attributes and so
+        reaches the same check internally.
+      
+      Consumers that iterate attributes with `.attributes().with_checks(false)` and do
+      not use `NsReader` are not affected.
+      
+      This was reported as reachable by a remote, unauthenticated attacker in a
+      real-world RPKI relying party (NLnet Labs Routinator) via a crafted RRDP
+      `snapshot.xml`.
+      
+      ## Remediation
+      
+      Upgrade to `quick-xml >= 0.41.0`, where the duplicate check keeps the linear
+      scan for start tags with a small number of attributes and switches to an `O(1)`
+      hash pre-filter above a threshold, making the whole tag `O(N)`. The reported
+      `AttrError::Duplicated` positions are unchanged.
+      
+      If upgrading is not possible and duplicate-name detection is not required,
+      disable it with `.attributes().with_checks(false)` (this does not help
+      `NsReader` consumers, which have no equivalent opt-out before 0.41.0).
+    ├ Announcement: https://github.com/tafia/quick-xml/issues/969
+    ├ Solution: Upgrade to >=0.41.0 (try `cargo update -p quick-xml`)
+    ├ quick-xml v0.38.4
+      └── librespot-core v0.8.0
+          ├── librespot-audio v0.8.0
+          │   └── librespot-playback v0.8.0
+          │       ├── librespot-connect v0.8.0
+          │       │   └── spotifast v0.12.0
+          │       └── spotifast v0.12.0 (*)
+          ├── librespot-connect v0.8.0 (*)
+          ├── librespot-metadata v0.8.0
+          │   ├── librespot-playback v0.8.0 (*)
+          │   └── spotifast v0.12.0 (*)
+          ├── librespot-playback v0.8.0 (*)
+          └── spotifast v0.12.0 (*)
+
+error[vulnerability]: Unbounded namespace-declaration allocation in `NsReader` enables memory-exhaustion denial of service
+    ┌─ <repo>/Cargo.lock:433:1
+    │
+433 │ quick-xml 0.38.4 registry+https://github.com/rust-lang/crates.io-index
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ security vulnerability detected
+    │
+    ├ ID: RUSTSEC-2026-0195
+    ├ Advisory: https://rustsec.org/advisories/RUSTSEC-2026-0195
+    ├ `NsReader` resolves namespaces by calling `NamespaceResolver::push` for every
+      `Start`/`Empty` event *before* the event is returned to the caller. `push`
+      iterated all `xmlns` / `xmlns:*` attributes on the start tag and, for each one,
+      appended the prefix bytes to an internal buffer and pushed a `NamespaceBinding`
+      (32 bytes on 64-bit) to an internal `Vec`, with no upper bound on the number of
+      declarations.
+      
+      ## Impact
+      
+      A start tag with `N` namespace declarations drove roughly `3×` the tag's byte
+      size in `NamespaceResolver` heap, allocated *inside* `quick-xml` before the
+      `NsReader` consumer ever received the event and could inspect or reject it. A
+      consumer that bounds its *input* size therefore still cannot bound this
+      allocation: an `M`-byte start tag yields on the order of `3 × M` bytes of
+      resolver heap the caller never sees.
+      
+      On untrusted XML this lets a remote, unauthenticated attacker force large heap
+      allocations with a single start tag. With several `NsReader`s running
+      concurrently on independent inputs (a common server pattern), the allocations
+      stack and can exhaust process memory, causing the operating system to kill the
+      process (OOM). This was confirmed against a real-world RPKI relying party (NLnet
+      Labs Routinator), where concurrent RRDP validation workers parsing a crafted
+      `snapshot.xml` exceeded the memory limit and the process was OOM-killed.
+      
+      ## Affected code paths
+      
+      Consumers using `NsReader` (which always calls `NamespaceResolver::push` before
+      yielding `Start`/`Empty`), or calling `NamespaceResolver::push` directly. A plain
+      `Reader` that does not perform namespace resolution is not affected.
+      
+      ## Remediation
+      
+      Upgrade to `quick-xml >= 0.41.0`. `NamespaceResolver::push` now rejects a start
+      tag that declares more than `DEFAULT_MAX_DECLARATIONS_PER_ELEMENT` (256)
+      namespace bindings, returning the new `NamespaceError::TooManyDeclarations`
+      instead of allocating without limit. The limit is configurable via
+      `NamespaceResolver::set_max_declarations_per_element` (use `usize::MAX` to
+      restore the previous unbounded behavior), and `NsReader::resolver_mut()` is
+      provided to reach it.
+      
+      There is no clean workaround for `NsReader` consumers before 0.41.0, as the
+      allocation happens inside the reader with no configuration knob to cap it.
+    ├ Announcement: https://github.com/tafia/quick-xml/issues/970
+    ├ Solution: Upgrade to >=0.41.0 (try `cargo update -p quick-xml`)
+    ├ quick-xml v0.38.4
+      └── librespot-core v0.8.0
+          ├── librespot-audio v0.8.0
+          │   └── librespot-playback v0.8.0
+          │       ├── librespot-connect v0.8.0
+          │       │   └── spotifast v0.12.0
+          │       └── spotifast v0.12.0 (*)
+          ├── librespot-connect v0.8.0 (*)
+          ├── librespot-metadata v0.8.0
+          │   ├── librespot-playback v0.8.0 (*)
+          │   └── spotifast v0.12.0 (*)
+          ├── librespot-playback v0.8.0 (*)
+          └── spotifast v0.12.0 (*)
+
+error[vulnerability]: Marvin Attack: potential key recovery through timing sidechannels
+    ┌─ <repo>/Cargo.lock:462:1
+    │
+462 │ rsa 0.9.10 registry+https://github.com/rust-lang/crates.io-index
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ security vulnerability detected
+    │
+    ├ ID: RUSTSEC-2023-0071
+    ├ Advisory: https://rustsec.org/advisories/RUSTSEC-2023-0071
+    ├ ### Impact
+      Due to a non-constant-time implementation, information about the private key is leaked through timing information which is observable over the network. An attacker may be able to use that information to recover the key.
+      
+      ### Patches
+      No patch is yet available. The crypto-bigint migration ([RustCrypto/RSA#394](https://github.com/RustCrypto/RSA/pull/394)) did not close this. Tracking is [RustCrypto/RSA#626](https://github.com/RustCrypto/RSA/issues/626) (padding still not constant-time). Implicit rejection work is in [RustCrypto/RSA#680](https://github.com/RustCrypto/RSA/pull/680); default-path blinding is in [RustCrypto/RSA#702](https://github.com/RustCrypto/RSA/pull/702).
+      
+      Still affected as of 2026-09-12: rsa 0.9.10 (latest stable) and rsa 0.10.0-rc.18 (latest). `patched = []` is intentional.
+      
+      ### Workarounds
+      Avoid using the `rsa` crate in settings where attackers can observe timing, for example over the network. Local use on a non-compromised computer is fine.
+      
+      ### References
+      This vulnerability was discovered as part of the "[Marvin Attack]", which revealed several implementations of RSA including OpenSSL had not properly mitigated timing sidechannel attacks.
+      
+      [Marvin Attack]: https://people.redhat.com/~hkario/marvin/
+    ├ Announcement: https://github.com/RustCrypto/RSA/issues/626
+    ├ Solution: No safe upgrade is available!
+    ├ rsa v0.9.10
+      └── librespot-core v0.8.0
+          ├── librespot-audio v0.8.0
+          │   └── librespot-playback v0.8.0
+          │       ├── librespot-connect v0.8.0
+          │       │   └── spotifast v0.12.0
+          │       └── spotifast v0.12.0 (*)
+          ├── librespot-connect v0.8.0 (*)
+          ├── librespot-metadata v0.8.0
+          │   ├── librespot-playback v0.8.0 (*)
+          │   └── spotifast v0.12.0 (*)
+          ├── librespot-playback v0.8.0 (*)
+          └── spotifast v0.12.0 (*)
+
+error[vulnerability]: TLS 1.3 handshake messages incorrectly accepted across encryption level boundaries
+    ┌─ <repo>/Cargo.lock:467:1
+    │
+467 │ rustls 0.23.43 registry+https://github.com/rust-lang/crates.io-index
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ security vulnerability detected
+    │
+    ├ ID: RUSTSEC-2026-0285
+    ├ Advisory: https://rustsec.org/advisories/RUSTSEC-2026-0285
+    ├ Rustls accepted TLS 1.3 handshake messages sent at the wrong encryption level
+      when they followed a key-changing message in the same record. For example,
+      a plaintext `EncryptedExtensions` message packed into the same record as the
+      `ServerHello` was accepted.
+      
+      RFC 8446 section 5.1 requires that handshake messages do not span key changes,
+      and that implementations terminate the connection with an "unexpected_message"
+      alert if they do.
+      
+      The handshake transcript is still authenticated, so a network-position attacker
+      cannot use this to alter or complete a handshake; the practical effect is that
+      a peer could send handshake messages that should be encrypted in plaintext
+      without rustls rejecting the connection.
+      
+      This is functionally the same bug as Go's
+      [GO-2026-4340](https://pkg.go.dev/vuln/GO-2026-4340) (CVE-2025-61730).
+    ├ Announcement: https://github.com/rustls/rustls/security/advisories/GHSA-2mjx-qc3c-rqvc
+    ├ Solution: Upgrade to >=0.23.45 (try `cargo update -p rustls`)
+    ├ rustls v0.23.43
+      ├── hyper-rustls v0.27.9
+      │   ├── hyper-proxy2 v0.1.0
+      │   │   └── librespot-core v0.8.0
+      │   │       ├── librespot-audio v0.8.0
+      │   │       │   └── librespot-playback v0.8.0
+      │   │       │       ├── librespot-connect v0.8.0
+      │   │       │       │   └── spotifast v0.12.0
+      │   │       │       └── spotifast v0.12.0 (*)
+      │   │       ├── librespot-connect v0.8.0 (*)
+      │   │       ├── librespot-metadata v0.8.0
+      │   │       │   ├── librespot-playback v0.8.0 (*)
+      │   │       │   └── spotifast v0.12.0 (*)
+      │   │       ├── librespot-playback v0.8.0 (*)
+      │   │       └── spotifast v0.12.0 (*)
+      │   ├── librespot-core v0.8.0 (*)
+      │   └── reqwest v0.12.28
+      │       ├── fastframe-update v0.4.1
+      │       │   └── spotifast v0.12.0 (*)
+      │       ├── librespot-oauth v0.8.0
+      │       │   └── librespot-core v0.8.0 (*)
+      │       ├── oauth2 v5.0.0
+      │       │   └── librespot-oauth v0.8.0 (*)
+      │       └── spotifast v0.12.0 (*)
+      ├── reqwest v0.12.28 (*)
+      ├── tokio-rustls v0.26.4
+      │   ├── hyper-proxy2 v0.1.0 (*)
+      │   ├── hyper-rustls v0.27.9 (*)
+      │   ├── reqwest v0.12.28 (*)
+      │   └── tokio-tungstenite v0.28.0
+      │       └── librespot-core v0.8.0 (*)
+      ├── tokio-tungstenite v0.28.0 (*)
+      └── tungstenite v0.28.0
+          └── tokio-tungstenite v0.28.0 (*)
+
+error[unmaintained]: `ttf-parser` is unmaintained
+    ┌─ <repo>/Cargo.lock:574:1
+    │
+574 │ ttf-parser 0.25.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ unmaintained advisory detected
+    │
+    ├ ID: RUSTSEC-2026-0192
+    ├ Advisory: https://rustsec.org/advisories/RUSTSEC-2026-0192
+    ├ The author of `ttf-parser` has stated that the crate is unmaintained and will not receive further fixes (see the referenced issue).
+      
+      ## Alternative(s)
+      
+      - [`skrifa`](https://crates.io/crates/skrifa), an actively maintained TrueType and OpenType font parsing crate, part of the Google Fonts "oxidize" (`fontations`) project.
+    ├ Announcement: https://github.com/harfbuzz/ttf-parser/issues/217
+    ├ Solution: No safe upgrade is available!
+    ├ ttf-parser v0.25.1
+      └── owned_ttf_parser v0.25.1
+          └── ab_glyph v0.2.32
+              └── sctk-adwaita v0.10.1
+                  └── winit v0.30.13
+                      ├── accesskit_winit v0.32.2
+                      │   └── egui-winit v0.36.1
+                      │       └── eframe v0.36.1
+                      │           ├── fastframe-macos v0.4.1
+                      │           │   └── spotifast v0.12.0
+                      │           ├── fastframe-shell v0.4.1
+                      │           │   └── spotifast v0.12.0 (*)
+                      │           └── spotifast v0.12.0 (*)
+                      ├── eframe v0.36.1 (*)
+                      ├── egui-winit v0.36.1 (*)
+                      ├── glutin-winit v0.5.0
+                      │   ├── eframe v0.36.1 (*)
+                      │   └── spotifast v0.12.0 (*)
+                      └── spotifast v0.12.0 (*)
+
+advisories FAILED

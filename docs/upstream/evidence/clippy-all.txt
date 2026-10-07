@@ -1,0 +1,3 @@
+   Compiling projectm-sys v1.2.3 (https://github.com/dennisgr7/projectm-rs?rev=1ef6df1c20247a3a5800c625e46262330f93bbd6#1ef6df1c)
+   Compiling spotifast v0.12.0 (<repo>)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.94s

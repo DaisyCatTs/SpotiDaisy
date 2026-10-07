@@ -1,0 +1,85 @@
+Bundler 4.0.22 is running, but your lockfile was generated with 4.0.16. Installing Bundler 4.0.16 and restarting using that version.
+Fetching gem metadata from https://rubygems.org/.
+Fetching bundler 4.0.16
+Installing bundler 4.0.16
+Fetching gem metadata from https://rubygems.org/..........
+Fetching rake 13.4.2
+Installing rake 13.4.2
+Fetching bigdecimal 4.1.2
+Fetching public_suffix 7.0.5
+Fetching base64 0.3.0
+Fetching cgi 0.5.2
+Fetching addressable 2.9.0
+Fetching colorator 1.1.0
+Fetching concurrent-ruby 1.3.8
+Fetching csv 3.3.6
+Fetching eventmachine 1.2.7
+Fetching http_parser.rb 0.8.1
+Fetching google-protobuf 4.36.0 (x86_64-linux-gnu)
+Fetching forwardable-extended 2.6.0
+Fetching em-websocket 0.5.3
+Fetching ffi 1.17.4 (x86_64-linux-gnu)
+Fetching i18n 1.15.2
+Fetching sass-embedded 1.103.1 (x86_64-linux-gnu)
+Fetching jekyll-sass-converter 3.1.0
+Fetching logger 1.7.0
+Installing cgi 0.5.2 with native extensions
+Fetching rb-fsevent 0.11.2
+Fetching rb-inotify 0.11.1
+Fetching listen 3.10.0
+Fetching jekyll-watch 2.2.1
+Fetching json 2.21.2
+Fetching rexml 3.4.4
+Installing eventmachine 1.2.7 with native extensions
+Fetching kramdown 2.5.2
+Installing http_parser.rb 0.8.1 with native extensions
+Fetching kramdown-parser-gfm 1.1.0
+Fetching liquid 4.0.4
+Fetching mercenary 0.4.0
+Fetching pathutil 0.16.2
+Fetching rouge 4.7.0
+Fetching safe_yaml 1.0.5
+Fetching unicode-display_width 2.6.0
+Fetching terminal-table 3.0.2
+Fetching webrick 1.9.2
+Installing bigdecimal 4.1.2 with native extensions
+Fetching jekyll 4.4.1
+Fetching jekyll-redirect-from 0.16.0
+Fetching jekyll-vitepress-theme 1.9.1
+Installing base64 0.3.0
+Installing json 2.21.2 with native extensions
+Installing colorator 1.1.0
+Installing addressable 2.9.0
+Installing public_suffix 7.0.5
+Installing csv 3.3.6
+Installing forwardable-extended 2.6.0
+Installing concurrent-ruby 1.3.8
+Installing em-websocket 0.5.3
+Installing i18n 1.15.2
+Installing ffi 1.17.4 (x86_64-linux-gnu)
+Installing jekyll-sass-converter 3.1.0
+Installing google-protobuf 4.36.0 (x86_64-linux-gnu)
+Installing logger 1.7.0
+Installing rb-inotify 0.11.1
+Installing jekyll-watch 2.2.1
+Installing listen 3.10.0
+Installing rb-fsevent 0.11.2
+Installing kramdown-parser-gfm 1.1.0
+Installing unicode-display_width 2.6.0
+Installing pathutil 0.16.2
+Installing rexml 3.4.4
+Installing liquid 4.0.4
+Installing kramdown 2.5.2
+Installing mercenary 0.4.0
+Installing safe_yaml 1.0.5
+Installing terminal-table 3.0.2
+Installing jekyll-redirect-from 0.16.0
+Installing webrick 1.9.2
+Installing jekyll 4.4.1
+Installing rouge 4.7.0
+Installing jekyll-vitepress-theme 1.9.1
+Installing sass-embedded 1.103.1 (x86_64-linux-gnu)
+Bundle complete! 4 Gemfile dependencies, 38 gems now installed.
+Bundled gems are installed into `../.cache/phase0/bundle`
+1 installed gem you directly depend on is looking for funding.
+  Run `bundle fund` for details
