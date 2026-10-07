@@ -45,27 +45,40 @@ were restored and that incidental lockfile change is not part of Phase 0.
 | `cargo build --locked --release --features demo` | Pass, optimized demo and MilkDrop, 3m23s cold build | `evidence/build-release-demo.txt` |
 | `cargo build --locked --release` | Pass, production app without demo | `evidence/build-release.txt` |
 | Final format and branding tests | Pass, 3 branding tests | `evidence/fmt-final.txt`, `evidence/branding-final.txt` |
+| Final `cargo test --locked --all-targets` | Pass: 939 library tests, unchanged launch-contract tests and all targets | `evidence/test-default-final.txt` |
+| Final `cargo test --locked --all-targets --all-features` | Pass: 962 library tests and all targets | `evidence/test-all-final.txt` |
+| Final all-feature clippy, warnings denied | Pass | `evidence/clippy-final.txt` |
+| Clean LF launcher tests in WSL | Pass, 4 tests | `evidence/launchers-clean-lf.txt` |
 | Native Credential Manager dummy round-trip, exact ignored test | Pass, 1 test | `evidence/native-store.txt` |
 | Updater default test executable copied to neutral `phase0-check.exe` | Both tests pass; diagnostic experiment only | `evidence/update-launch-renamed.txt` |
 | `py packaging/flatpak/test-metainfo.py` | Pass, 4 tests | `evidence/metainfo.txt` |
 | `py packaging/test-release-names.py` | Pass, 4 tests | `evidence/release-names.txt` |
 | `py packaging/test-launchers.py` on Windows | Fail: missing Unix true/Ruby and path semantics | `evidence/launchers-windows.txt` |
-| Launcher tests under WSL, checkout and Git archive | Fail: CRLF shell files plus Flatpak mismatch | `evidence/launchers-wsl-configured.txt`, `evidence/launchers-lf-baseline.txt` |
-| Launcher tests under WSL after normalizing only scratch shell files | Fail: 2 Flatpak StartupWMClass assertions; other test methods pass | `evidence/launchers-normalized-scratch.txt` |
+| Launcher tests under WSL, checkout and Git archive | Fail: CRLF conversion, including desktop payload | `evidence/launchers-wsl-configured.txt`, `evidence/launchers-lf-baseline.txt` |
+| Launcher tests under WSL after normalizing only scratch shell files | Fail: desktop payload still CRLF; diagnosis superseded below | `evidence/launchers-normalized-scratch.txt` |
 | `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt` |
 | `cargo deny check advisories` | Fail: 4 vulnerabilities, 1 unmaintained warning/error | `evidence/advisories.txt` |
 | `cargo deny check` without a repository policy | Fail: advisories and default license policy rejects common licenses; bans/sources checks completed with warnings | See SECURITY_AND_DEPENDENCIES.md; generic output not retained as a multi-megabyte artifact |
 
 Some integration targets ran zero tests on Windows due to platform cfgs. The
 ignored native-store test was run separately and passed. No tests were deleted,
-skipped, weakened or renamed in the repository to conceal failures.
+skipped or weakened. The test target and developer inspection example were
+renamed to neutral executable names to avoid Windows installer-name heuristics;
+their source contents and assertions are identical.
 
 The neutral-name experiment supports Windows installer-name heuristics as the
 cause of error 740. It is not a passing result for the documented Cargo command.
-The controlled launcher experiment isolates a genuine inherited Flatpak
-`StartupWMClass=spotifast` versus expected `rocks.spotifast.Spotifast` mismatch.
-Git blobs use LF; Windows `core.autocrlf=true` gives the checkout and git archive
-CRLF. Only disposable scratch shell files were normalized for diagnosis.
+The earlier claim of an inherited Flatpak mismatch was incorrect: the desktop
+payload also had CRLF, so the sed end-of-line match could not apply. A fresh
+`git -c core.autocrlf=false archive` export passes all four launcher tests under
+WSL without modifying packaging source. See `evidence/launchers-clean-lf.txt`.
+
+Follow-up: `tests/update_launch.rs` is now `tests/launch_contract.rs` and
+`examples/updater-inspect.rs` is now `examples/release-inspect.rs`. Both names
+triggered error 740 on this machine. Neither contains changed Rust code. The
+example invocation is now `cargo run --example release-inspect -- <app-path>`.
+The original failure evidence is retained separately from final passing runs.
+
 
 ## Native runtime and visual baseline
 

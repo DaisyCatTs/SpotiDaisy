@@ -2214,7 +2214,7 @@ Release:
 - [x] protect branches.
 - [x] create `dev`.
 - [x] create upstream docs.
-- [!] baseline tests.
+- [x] baseline tests.
 - [!] baseline CPU/RAM/startup.
 - [x] baseline screenshots.
 - [x] dependency audit.
@@ -2535,7 +2535,7 @@ Start here, in this exact order:
 - [x] generate architecture map.
 - [x] enumerate current Spotifast functionality.
 - [x] identify Daisy modifications already present.
-- [!] run tests.
+- [x] run tests.
 - [x] run demo.
 - [!] benchmark startup/RAM/idle CPU.
 - [x] inspect UI screenshots.

@@ -28,7 +28,8 @@ post-release upstream commits despite still reporting version 0.12.0.
 No intake source or commit divergence: 0 ahead, 0 behind, identical tree. The
 first Daisy work consists of plan copies, baseline/ADR documents, audit evidence,
 safe branch settings, explicit policy override and a dev CI trigger. Cargo,
-lockfile, runtime, queue, audio and appearance remain unchanged. No new upstream
+lockfile, runtime, queue, audio and appearance remain unchanged. Two development
+target filenames changed to avoid Windows executable-name elevation heuristics. No new upstream
 commit was accepted/rejected or ported. [DIVERGENCE.md](DIVERGENCE.md) separates
 inherited behavior from recommended future ownership.
 
@@ -96,11 +97,13 @@ native targets were inspected, not built or tested.
 Formatting, both clippy variants, rustdoc, doc-test command, development demo,
 optimized demo, production release, native keyring dummy round trip and Jekyll pass. Library tests:
 939 default / 962 all-feature pass, one ignored native test later run and passed.
-Other executed bin/branding/localization tests pass. Both complete Cargo test
-commands still exit 101 on updater executable error 740. Copying that compiled
-test runner to a neutral name yields two passes but does not replace the failure.
+Other executed bin/branding/localization tests pass. Initial complete Cargo test
+commands exited 101 with Windows error 740. Follow-up neutral target filenames
+allow the unchanged tests to run; both final complete Cargo commands now pass. All-feature clippy and formatting
+pass too; outcomes are in VALIDATION.md.
 Metainfo and release-name Python checks each pass four tests. Launcher checks
-fail two Flatpak identity assertions even after controlled scratch normalization.
+pass all four tests in a clean LF export. The earlier Flatpak mismatch finding
+was caused by CRLF in the desktop payload and is superseded.
 Dependency advisory scan fails. Full evidence and platform limits are explicit.
 
 ## 8. Performance baseline
@@ -121,7 +124,7 @@ audio. True cold and multi-hour/day sessions remain unvalidated.
 
 ## 9. Bugs, warnings and risks
 
-Updater test UAC launch failure; genuine Flatpak StartupWMClass mismatch; Windows
+Inherited updater target names triggered UAC launch failure, now corrected; Windows
 CRLF obstructs Unix script tests; missing native tooling at intake; crowded and
 clipped 760px queue layout; unregistered fork CI; four dependency vulnerabilities
 and one unmaintained transitive dependency. Updater/package identities still
@@ -173,7 +176,8 @@ Copied master plan/handoff/Figma brief. Added the four required upstream files,
 architecture/security/quality/validation/report companions, screenshot index,
 two measurement scripts and sanitized evidence/captures. Added ADR index and
 three ADRs (upstream strategy, preserved native subsystems, credentials/identity).
-Updated only Phase 0-related master checklist entries. Added Daisy overrides to
+Renamed the integration test and developer inspection example without changing
+their contents. Updated only Phase 0-related master checklist entries. Added Daisy overrides to
 AGENTS/CONTRIBUTING and dev to the CI push trigger. Git refs/remotes and host
 protections changed; runtime source and application dependencies did not.
 
@@ -181,20 +185,18 @@ protections changed; runtime source and application dependencies did not.
 
 The master plan is authoritative. Inventory, exact SHA, remotes, protected branch
 structure/dev, upstream documents, screenshots, dependency/architecture/license
-audits and branding plan are validated audit deliverables. Complete-test green
-status, complete cold/exact-build performance coverage and fork CI remain blocked.
+audits and branding plan are validated audit deliverables. Complete cold/exact-build performance coverage and fork CI remain blocked.
 Completed Phase 0 rows: inventory fork; upstream SHA; remotes; branch protection;
-dev; upstream docs; screenshots; dependencies; architecture; licensing audit;
+dev; upstream docs; baseline tests; screenshots; dependencies; architecture; licensing audit;
 branding replacement plan. Completed Task A rows: root; branch/remotes; exact
-relationship; architecture; features; existing Daisy changes; demo; screenshots;
+relationship; architecture; features; existing Daisy changes; tests; demo; screenshots;
 upstream docs; ADRs. All six Task B rows completed.
 Task A/B rows distinguish executed successes from blocked validation. No Phase 1
 or later feature checklist was advanced.
 
 ## 16. Blocked/unresolved
 
-Fork CI activation/registry and native matrix/Nix; documented full-test exit 740;
-Flatpak launcher mismatch; real cold startup and exact-build authenticated
+Fork CI activation/registry and native matrix/Nix; real cold startup and exact-build authenticated
 performance; multi-hour/day browsing/audio soak; legal/package attribution
 compliance and upstream advisory remediation. The last two were audited but are
 release risks, not scope for a broad Phase 0 dependency/audio rewrite.

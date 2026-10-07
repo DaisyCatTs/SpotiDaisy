@@ -178,7 +178,7 @@ and app identity ownership are deliberately reworked.
   `packaging/flatpak/test-metainfo.py:22-69`.
 - Linux clean-container install coverage is in `packaging/test-install.sh:25-77`.
 - GUI runtime library probing is in `packaging/check-runtime-libs.c:1-28`.
-- Update launch compatibility tests are in `tests/update_launch.rs:1-63`.
+- Update launch compatibility tests are in `tests/launch_contract.rs:1-63`.
 - Startup diagnostics test is Linux/demo-gated in `tests/startup_diagnostics.rs:1-35`.
 - Linux tray behavior test is in `tests/tray.rs:1-74`.
 - Branding tests are in `tests/branding.rs:23-114` and Linux command forwarding

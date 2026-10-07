@@ -18,6 +18,7 @@ caches and optimistic queue logic are inherited upstream functionality.
 | `docs/adr/*` | Daisy decisions already mandated by the brief or inherited implementation | Checked against current source and explicit requirements |
 | `.github/workflows/ci.yml` | Push CI also runs on dev | One-line trigger change; no runtime or test changes |
 | `AGENTS.md`, `CONTRIBUTING.md` | Explicit Daisy policy override, inherited implementation rules preserved | Removes future direct-to-main policy ambiguity |
+| Test/developer executable names | `launch_contract` and `release-inspect`, same contents | Full Cargo checks recorded in VALIDATION.md; avoids Windows error 740 |
 | Git configuration/refs | Added upstream; published baseline tag and local namespaced release tag; local/remote dev | Exact ref checks in baseline |
 | GitHub protection | Stable-main review gate and linear/no-force/no-delete safeguards | Read-back snapshots in evidence |
 

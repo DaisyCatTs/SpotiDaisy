@@ -559,7 +559,7 @@ High-signal test areas:
   `src/ui/keys.rs:311+`, `src/ui/player_bar.rs:939+`.
 - Integration-style tests:
   `tests/branding.rs`, `tests/localization.rs`, `tests/omarchy.rs`,
-  `tests/startup_diagnostics.rs`, `tests/tray.rs`, `tests/update_launch.rs`.
+  `tests/startup_diagnostics.rs`, `tests/tray.rs`, `tests/launch_contract.rs`.
 
 The full CONTRIBUTING check suite is larger than this architecture audit and
 belongs in the overall Phase 0 verification report.
