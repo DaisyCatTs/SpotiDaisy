@@ -41,7 +41,7 @@ pushes/deletion, and applies to administrators on both main and dev. Main also
 requires one PR approval and dismisses stale approvals. Dev permits direct
 focused work. Main requires strict status checks named `quality`, the four
 platform `test (...)` jobs, `Nix package`, and `docs`. Their names come from the
-workflow; no fork run has validated them yet. Protection alone is not a complete
+workflow; full matrix validation is now running after successful registration. Protection alone is not a complete
 release gate. The baseline tag was also published to origin without using a
 release-triggering `v*` tag.
 Snapshots: [main](evidence/main-protection.json), [dev](evidence/dev-protection.json).
@@ -59,6 +59,7 @@ automatic fork-to-parent resolution. Still use explicit `--repo` for mutations.
 - [Security, persistence, dependencies and licensing](SECURITY_AND_DEPENDENCIES.md)
 - [CI, platforms, packaging and branding replacement plan](QUALITY_AND_BRANDING.md)
 - [Executed checks and runtime measurements](VALIDATION.md)
+- [Phase 0 closeout and release gates](CLOSEOUT.md)
 - [Accepted upstream changes](ACCEPTED_UPSTREAM.md)
 - [Rejected upstream changes](REJECTED_UPSTREAM.md)
 - [Recorded decisions](../adr/README.md)
@@ -80,3 +81,14 @@ The origin tag is a remote recovery anchor, not an independently backed-up or
 signed archive. Baseline reproducibility depends on retained Git history and access to the
 commit-pinned fork dependencies. This audit does not guarantee those external
 repositories will remain available indefinitely.
+
+## Closeout follow-up
+
+The audit/test fixes are published to origin/dev. A new read-only Daisy baseline
+workflow registered successfully, and the full native CI matrix is now running.
+See CLOSEOUT.md for run links and observed results. A second safe upstream fetch
+confirmed upstream/main remains the exact baseline SHA. Dev currently has four
+Daisy commits ahead and zero behind; no upstream commit has been merged/ported.
+
+Closeout evidence is maintained on audit/phase0-closeout, based on dev, to avoid
+cancelling the dev validation run when only audit documents are published.

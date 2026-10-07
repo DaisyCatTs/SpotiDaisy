@@ -266,3 +266,10 @@ package installation, update compatibility, and user data handling.
   repository, website domain, or signing identity is documented in the repo yet.
 - No local result is recorded here for CI, clippy, tests, packaging tests, Nix,
   docs build, or release workflow dry runs.
+
+## Phase 0 CI closeout
+
+A read-only Daisy baseline workflow is now registered and passing. The full
+inherited CI matrix is registered and running on dev. See CLOSEOUT.md and
+VALIDATION.md for run identifiers and final observed coverage. Earlier statements
+about an empty fork registry describe the intake state and are superseded.

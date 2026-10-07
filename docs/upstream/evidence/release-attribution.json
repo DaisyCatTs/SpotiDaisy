@@ -1,0 +1,30 @@
+{
+  "release": "https://github.com/crmne/spotifast/releases/tag/v0.12.0",
+  "asset": "spotifast-v0.12.0-x86_64-pc-windows-msvc.zip",
+  "archiveSha256": "6b6c31d069c93feb1750f1083ff6273457add972296d772a28ea7ecb5f032a51",
+  "executableSha256": "e4867b8eb54021732126b6f0c906702b31d2ffc7a6e725e3dcb121b2f478fe01",
+  "matchesInstalledExecutable": true,
+  "entries": [
+    {
+      "name": "spotifast-v0.12.0-x86_64-pc-windows-msvc/",
+      "bytes": 0
+    },
+    {
+      "name": "spotifast-v0.12.0-x86_64-pc-windows-msvc/LICENSE",
+      "bytes": 1093
+    },
+    {
+      "name": "spotifast-v0.12.0-x86_64-pc-windows-msvc/README.md",
+      "bytes": 37985
+    },
+    {
+      "name": "spotifast-v0.12.0-x86_64-pc-windows-msvc/spotifast-portable.txt",
+      "bytes": 23
+    },
+    {
+      "name": "spotifast-v0.12.0-x86_64-pc-windows-msvc/spotifast.exe",
+      "bytes": 30373376
+    }
+  ],
+  "scope": "One upstream portable Windows x64 asset. No execution or installation. Archive hash matched published checksums; other package formats not inspected."
+}

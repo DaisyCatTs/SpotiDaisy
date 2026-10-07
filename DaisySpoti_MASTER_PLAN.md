@@ -2221,7 +2221,7 @@ Release:
 - [x] architecture map.
 - [x] licensing audit.
 - [x] branding replacement plan.
-- [!] CI.
+- [~] CI.
 
 **Exit:** Daisy can always identify/recover upstream changes safely.
 

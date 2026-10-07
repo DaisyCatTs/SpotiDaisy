@@ -8,7 +8,7 @@ Primary evidence sources:
 
 - `Cargo.toml` and `Cargo.lock`
 - `docs/upstream/evidence/advisories.txt`
-- `docs/upstream/evidence/cargo-deny.txt`
+- Generic cargo-deny results summarized below; multi-megabyte fallback-policy output was not retained.
 - `src/auth.rs`, `src/credentials.rs`, `src/settings.rs`, `src/paths.rs`, `src/http.rs`, `src/updates.rs`, `src/lyrics.rs`, `src/milkdrop.rs`, `src/zeroconf.rs`, `src/api/client.rs`
 - `docs/_reference/how-it-connects.md`, `docs/_reference/settings-and-files.md`, `docs/_reference/privacy.md`, `docs/_reference/what-spotify-allows.md`
 - cached projectM checkout at `C:\Users\Daisy\.cargo\git\checkouts\projectm-rs-3f6f91abd1608807\1ef6df1`
@@ -238,3 +238,9 @@ Security and dependency invariants already inherent in the repository:
 - Exact legal obligations for the projectM static-linking configuration need maintainer/legal review.
 - The full release artifact contents were not audited here, so attribution files actually shipped by installers/packages need a packaging-specific pass.
 - Linux native credential store behavior depends on Secret Service availability and desktop environment configuration; source and tests cover fallbacks, but real-desktop behavior varies.
+
+## Phase 0 closeout
+
+See [CLOSEOUT.md](CLOSEOUT.md) for source-level advisory applicability, concrete
+attribution/package release gates and CI activation follow-up. No advisory is
+suppressed and the baseline dependency graph remains unchanged.

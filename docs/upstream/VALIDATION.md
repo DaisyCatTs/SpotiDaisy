@@ -56,7 +56,7 @@ were restored and that incidental lockfile change is not part of Phase 0.
 | `py packaging/test-launchers.py` on Windows | Fail: missing Unix true/Ruby and path semantics | `evidence/launchers-windows.txt` |
 | Launcher tests under WSL, checkout and Git archive | Fail: CRLF conversion, including desktop payload | `evidence/launchers-wsl-configured.txt`, `evidence/launchers-lf-baseline.txt` |
 | Launcher tests under WSL after normalizing only scratch shell files | Fail: desktop payload still CRLF; diagnosis superseded below | `evidence/launchers-normalized-scratch.txt` |
-| `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt` |
+| `bundle exec jekyll build` under WSL | Pass; final audit docs also build, 5.142s | `evidence/jekyll.txt`, `evidence/jekyll-final.txt`, `evidence/jekyll-closeout.txt` |
 | `cargo deny check advisories` | Fail: 4 vulnerabilities, 1 unmaintained warning/error | `evidence/advisories.txt` |
 | `cargo deny check` without a repository policy | Fail: advisories and default license policy rejects common licenses; bans/sources checks completed with warnings | See SECURITY_AND_DEPENDENCIES.md; generic output not retained as a multi-megabyte artifact |
 
@@ -116,8 +116,12 @@ without changing settings, login or playback. The user confirmed playback and
 then paused it on request. Each sample lasts approximately two minutes.
 Installed binary reports 0.12.0 and hash
 `E4867B8EB54021732126B6F0C906702B31D2FFC7A6E725E3DCB121B2F478FE01`.
-Its exact build commit is not proven by the version; do not equate it with the
-checkout's post-release baseline. No credentials, logs or track metadata from
+Version alone does not prove its commit. Follow-up archive verification found
+the installed executable exactly matches upstream v0.12.0 Windows portable
+payload, whose release tag is eleven commits before the checkout. This proves
+published-artifact identity, not a signed source-build attestation. See
+`evidence/release-attribution.json`; do not equate it with the post-release
+checkout baseline. No credentials, logs or track metadata from
 the installed app were read. Playback-locality relies on the requested user
 setup, not an instrumented output-device probe.
 
@@ -142,17 +146,21 @@ were preserved.
 
 ## CI and platform limits
 
-Fork API: Actions enabled, allowed actions all, zero registered workflows and
-zero runs. Contents API confirms ci.yml exists on main; explicit fork dispatch
-returns 404. A fresh dev policy/CI push did not register or start a workflow.
-The collaborative browser, unsigned-in, also shows zero runs. The exact cause
-is unproven; maintainer-side Actions activation or GitHub support may be needed.
+Initially the fork API had Actions enabled but zero registered workflows/runs.
+Explicit ci.yml dispatch returned 404 despite a confirmed workflow file. After
+adding `.github/workflows/phase0.yml` and pushing dev, both that workflow and the
+existing CI registered. Registration was initially asynchronous; the specific
+server-side cause of the earlier empty registry is not established.
 
-One initial `gh workflow run` implicitly resolved upstream and was denied 403;
-no upstream workflow was started. Subsequent commands explicitly targeted the
-Daisy repository. Main has required check names but none has a verified fork
-result. CI is blocked, not green. No release, docs deployment, package publish
-or stable-main merge was performed.
+The read-only Daisy baseline push and manual runs passed, including formatting,
+manifest and four launcher contracts. Full native CI run 37685448644 is underway:
+https://github.com/DaisyCatTs/SpotiDaisy/actions/runs/37685448644 .
+Registration is resolved; seven-job completion is not claimed until observed.
+Two earlier full runs were cancelled during duplicate/concurrency cleanup.
+
+One initial gh workflow run implicitly resolved upstream and was denied 403;
+no upstream workflow started. All closeout commands explicitly target Daisy.
+Main remains unchanged. No release/deployment/publishing workflow was triggered.
 
 Windows x64 was built and run. WSL tested packaging scripts and the docs site,
 not a Linux GUI/audio build. macOS, Windows ARM, Linux native GUI/audio, Nix,
@@ -170,3 +178,14 @@ later validation. These gaps must remain visible in the master checklist.
 
 Disposable QA scratch remains ignored under .cache/phase0 because automatic
 approval review rejected the recursive cleanup command. It is not committed.
+
+## Further installed-session observation
+
+A second ten-minute observation recorded 300 samples of the same installed binary
+hash/version without controlling playback or reading credentials. Mean CPU was
+0.04000%, maximum 0.2926%; working set 108.109-113.176 MiB and private commit
+414.961 to 415.879 MiB. Playback/window state was not confirmed for this interval,
+so these are session-observation metrics, not a new playing/paused benchmark.
+Working set can be trimmed by the OS and is not interchangeable with private
+commit. The +0.918 MiB short-interval change does not prove a leak or long-term
+stability. See evidence/installed-observed-session.json and its 300-row CSV.

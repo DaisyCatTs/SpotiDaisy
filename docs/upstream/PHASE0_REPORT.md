@@ -111,8 +111,10 @@ Dependency advisory scan fails. Full evidence and platform limits are explicit.
 Installed 0.12.0 user-confirmed playback, 120 seconds: mean total-machine CPU
 0.24556%, resident RAM 244.789-249.625 MiB, private commit 379.676-385.582 MiB.
 Paused, 120 seconds: mean CPU 0.01871%, resident RAM 241.188-244.910 MiB,
-private commit 377.391-378.254 MiB. Exact installed commit is unknown; its binary
-hash is recorded. No login/settings were modified or grants exported.
+private commit 377.391-378.254 MiB. Its binary hash matches the
+published upstream v0.12.0 Windows portable payload, associated with the release
+tag eleven commits before our checkout. This is artifact identity, not signed
+source-build provenance. No login/settings were modified or grants exported.
 
 Optimized isolated demo startup and ten-minute paused/static memory samples are
 in performance.json/startup.csv/idle-soak.csv: fresh-profile window readiness
@@ -126,7 +128,7 @@ audio. True cold and multi-hour/day sessions remain unvalidated.
 
 Inherited updater target names triggered UAC launch failure, now corrected; Windows
 CRLF obstructs Unix script tests; missing native tooling at intake; crowded and
-clipped 760px queue layout; unregistered fork CI; four dependency vulnerabilities
+clipped 760px queue layout; initially unregistered fork CI, now activated; four dependency vulnerabilities
 and one unmaintained transitive dependency. Updater/package identities still
 target Spotifast. No claimed fix, suppression or clean security bill.
 
@@ -196,7 +198,7 @@ or later feature checklist was advanced.
 
 ## 16. Blocked/unresolved
 
-Fork CI activation/registry and native matrix/Nix; real cold startup and exact-build authenticated
+Native matrix/Nix completion; real cold startup and exact-build authenticated
 performance; multi-hour/day browsing/audio soak; legal/package attribution
 compliance and upstream advisory remediation. The last two were audited but are
 release risks, not scope for a broad Phase 0 dependency/audio rewrite.
@@ -210,3 +212,8 @@ density and narrow/normal window behavior. Preserve Action/backend boundaries
 and Winamp/MilkDrop; approve visual scope before runtime shell implementation.
 Use the clipping capture as a real constraint. Do not start Pure Shuffle, local
 music, provider/audio expansion or Daisy Sound automatically.
+
+Closeout follow-up: audit/test fixes are pushed to dev, the fast Daisy baseline
+workflow passed, and the full CI matrix is active. See CLOSEOUT.md for the exact
+run and security/licensing priorities. Stable main and supplier dependency pins
+remain unchanged.
