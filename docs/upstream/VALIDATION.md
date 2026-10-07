@@ -215,6 +215,11 @@ inspected for attribution material; its binary was not executed.
 
 ## Remaining measurement gaps
 
+On 2026-10-07 Daisy explicitly waived the reboot-cold startup requirement.
+Phase 0's performance baseline is accepted within that revised scope. The
+master records the cold test as `[-]`; no cold measurement or passing result
+is claimed. The limitations below remain available for future profiling.
+
 True cold startup (reboot or controlled cache state), authenticated readiness
 timing beyond the native-window proxy, and multi-hour/day browsing/playback soak
 remain unvalidated. Exact-build warm window startup and authenticated playback

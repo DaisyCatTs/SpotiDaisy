@@ -111,8 +111,9 @@ working set. See VALIDATION.md for executable hash and evidence.
 User-confirmed paused/minimized sampling then averaged 0.00163% CPU,
 231.418-257.008 MiB working set and 426.098 to 400.301 MiB private commit.
 The application remains open; no credential migration or settings change was
-performed for this measurement. The master performance row remains blocked
-because true cold startup has not been validated.
+performed for this measurement. On 2026-10-07 Daisy explicitly waived the
+reboot-cold startup test. The validated performance row is complete within that
+scope; the skipped cold test is recorded as `[-]`, never as a successful measurement.
 Short samples cannot establish multi-hour cache bounds.
 
 Extended installed session: a further 20-minute/600-sample observation completed.

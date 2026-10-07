@@ -2215,7 +2215,8 @@ Release:
 - [x] create `dev`.
 - [x] create upstream docs.
 - [x] baseline tests.
-- [!] baseline CPU/RAM/startup.
+- [x] baseline CPU/RAM/startup (validated warm startup and authenticated playback/paused measurements).
+- [-] reboot-cold startup measurement (explicitly waived by Daisy on 2026-10-07).
 - [x] baseline screenshots.
 - [x] dependency audit.
 - [x] architecture map.
@@ -2537,7 +2538,7 @@ Start here, in this exact order:
 - [x] identify Daisy modifications already present.
 - [x] run tests.
 - [x] run demo.
-- [!] benchmark startup/RAM/idle CPU.
+- [x] benchmark startup/RAM/idle CPU (warm startup; authenticated playback and paused/minimized idle).
 - [x] inspect UI screenshots.
 - [x] create `docs/upstream/*`.
 - [x] create `docs/adr/`.

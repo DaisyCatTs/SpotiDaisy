@@ -1,6 +1,7 @@
 # DaisySpoti Phase 0 review report
 
-Date: 2026-10-07. **Audit delivered; Phase 0 has blocked validation gates.**
+Date: 2026-10-07. **Phase 0 complete within the user-approved measurement scope.**
+Reboot-cold startup was explicitly waived by Daisy, not measured or claimed to pass.
 No later phase started. Existing failures are preserved, not silently fixed.
 The authoritative command/measurement detail is [VALIDATION.md](VALIDATION.md).
 
@@ -122,7 +123,8 @@ speedup comparison against the earlier release sample.
 User-confirmed paused/minimized playback for another 120 seconds averaged
 0.00163% CPU; working set 231.418-257.008 MiB and private commit 426.098 to
 400.301 MiB. Exact-build authenticated playback and minimized idle are now
-measured; true cold startup remains blocked. No later-phase checkbox changed.
+measured; true cold startup was explicitly waived by Daisy on 2026-10-07.
+No later-phase checkbox changed.
 
 Installed 0.12.0 user-confirmed playback, 120 seconds: mean total-machine CPU
 0.24556%, resident RAM 244.789-249.625 MiB, private commit 379.676-385.582 MiB.
@@ -208,24 +210,27 @@ protections changed; runtime source and application dependencies did not.
 
 The master plan is authoritative. Inventory, exact SHA, remotes, protected branch
 structure/dev, upstream documents, screenshots, dependency/architecture/license
-audits and branding plan are validated audit deliverables. True cold startup remains unvalidated.
+audits and branding plan are validated audit deliverables. Warm startup and
+authenticated CPU/RAM measurements are validated. Reboot-cold startup is
+intentionally skipped at Daisy's explicit request, recorded as `[-]`.
 Completed Phase 0 rows: inventory fork; upstream SHA; remotes; branch protection;
-dev; upstream docs; baseline tests; screenshots; dependencies; architecture; licensing audit;
+dev; upstream docs; baseline tests; CPU/RAM/warm startup; screenshots; dependencies; architecture; licensing audit;
 branding replacement plan; CI. Completed Task A rows: root; branch/remotes; exact
-relationship; architecture; features; existing Daisy changes; tests; demo; screenshots;
+relationship; architecture; features; existing Daisy changes; tests; demo; startup/RAM/idle CPU; screenshots;
 upstream docs; ADRs. All six Task B rows completed.
-Task A/B rows distinguish executed successes from blocked validation. No Phase 1
+Task A/B rows distinguish executed successes from the explicitly waived cold test. No Phase 1
 or later feature checklist was advanced.
 
 ## 16. Blocked/unresolved
 
-Real cold startup; multi-hour/day browsing/audio soak; legal/package attribution
+No remaining Phase 0 blocker under the user-approved scope. Reboot-cold startup
+was waived. Multi-hour/day browsing/audio soak remains unvalidated; legal/package attribution
 compliance and upstream advisory remediation. The last two were audited but are
 release risks, not scope for a broad Phase 0 dependency/audio rewrite.
 
 ## 17. Exact starting point for Phase 1
 
-First review this audit and decide how to close the remaining Phase 0 gates.
+First review this completed audit and its explicitly waived cold-start measurement.
 After authorization to Phase 1, begin with Figma foundations and a matched
 prototype for the existing shell: neutral tokens, typography, dark/light/OLED,
 density and narrow/normal window behavior. Preserve Action/backend boundaries
