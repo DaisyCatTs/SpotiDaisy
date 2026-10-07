@@ -1,0 +1,11 @@
+{
+  "DateUtc": "2026-10-07T21:50:00.1465928Z",
+  "Executable": "<repo>/target/release/spotifast.exe",
+  "Sha256": "9859B5BD13B4EE8927CD144DE73B203A622D9E85613BC62BC03987FF286176D4",
+  "ProcessId": 4740,
+  "Condition": "Warm",
+  "BootUtc": "2026-10-07T19:51:55.5000000Z",
+  "BootAgeSeconds": 7084.647,
+  "WindowReadyMs": 65.08,
+  "Caveat": "Production application using its existing local profile. Window handle is not first paint or Spotify readiness. Restart condition is operator-declared; boot age alone cannot prove cold caches or that no earlier launch occurred. Application remains open. No credentials or account data recorded."
+}

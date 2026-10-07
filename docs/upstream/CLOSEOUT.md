@@ -102,9 +102,18 @@ before our checkout. This establishes published-artifact identity, not an embedd
 commit or signed build attestation; do not equate it with the checkout.
 Fresh-profile/window-handle startup is a repeatable proxy, not reboot-cold/first
 paint. A real cold-start run requires a controlled restart/cache condition and
-user-compatible scheduling. Exact-build authenticated tests require deliberately
-switching applications; do not copy grants or change the existing account to
-manufacture a result. Ten-minute samples cannot establish multi-hour cache bounds.
+user-compatible scheduling. Exact-build authenticated testing was subsequently
+authorized by the user, who exited installed Spotifast before the production
+build was launched. The application restored its existing profile normally;
+no grants were copied or inspected. Warm main-window readiness was 65.08 ms.
+Two-minute playback sampling averaged 0.04146% CPU and 227.137-227.348 MiB
+working set. See VALIDATION.md for executable hash and evidence.
+User-confirmed paused/minimized sampling then averaged 0.00163% CPU,
+231.418-257.008 MiB working set and 426.098 to 400.301 MiB private commit.
+The application remains open; no credential migration or settings change was
+performed for this measurement. The master performance row remains blocked
+because true cold startup has not been validated.
+Short samples cannot establish multi-hour cache bounds.
 
 Extended installed session: a further 20-minute/600-sample observation completed.
 Mean CPU 0.04041%; resident RAM 79.492-135.262 MiB; private commit

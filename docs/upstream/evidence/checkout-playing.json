@@ -1,0 +1,15 @@
+{
+  "Label": "checkout-playing",
+  "Binary": "<repo>/target/release/spotifast.exe",
+  "Sha256": "9859B5BD13B4EE8927CD144DE73B203A622D9E85613BC62BC03987FF286176D4",
+  "Version": "spotifast 0.12.0",
+  "LogicalProcessors": 16,
+  "Samples": 60,
+  "CpuMean": 0.041458333333333326,
+  "CpuMax": 0.1463,
+  "WorkingSetMin": 227.137,
+  "WorkingSetMax": 227.348,
+  "PrivateFirst": 369.902,
+  "PrivateLast": 369.371,
+  "Caveat": "Checkout production build, existing local profile. User confirmed normal song playing after being asked to choose this computer. Playback locality is user-confirmed setup, not an instrumented audio-output probe. No credential access or playback control by the sampler."
+}

@@ -112,6 +112,18 @@ Dependency advisory scan fails. Full evidence and platform limits are explicit.
 
 ## 8. Performance baseline
 
+Follow-up exact-checkout production build: warm main-window readiness 65.08 ms.
+After the user authorized switching applications, the existing profile restored
+the login normally. User-confirmed playback for 120 seconds averaged 0.04146%
+total-machine CPU; resident RAM 227.137-227.348 MiB and private commit
+369.902 to 369.371 MiB. Binary hash and raw samples are in VALIDATION.md and
+evidence/checkout-playing.json. Different songs/session conditions preclude a
+speedup comparison against the earlier release sample.
+User-confirmed paused/minimized playback for another 120 seconds averaged
+0.00163% CPU; working set 231.418-257.008 MiB and private commit 426.098 to
+400.301 MiB. Exact-build authenticated playback and minimized idle are now
+measured; true cold startup remains blocked. No later-phase checkbox changed.
+
 Installed 0.12.0 user-confirmed playback, 120 seconds: mean total-machine CPU
 0.24556%, resident RAM 244.789-249.625 MiB, private commit 379.676-385.582 MiB.
 Paused, 120 seconds: mean CPU 0.01871%, resident RAM 241.188-244.910 MiB,
@@ -185,7 +197,7 @@ provider/audio/plugin/database abstraction was implemented or prematurely decide
 
 Copied master plan/handoff/Figma brief. Added the four required upstream files,
 architecture/security/quality/validation/report companions, screenshot index,
-two measurement scripts and sanitized evidence/captures. Added ADR index and
+three measurement scripts and sanitized evidence/captures. Added ADR index and
 three ADRs (upstream strategy, preserved native subsystems, credentials/identity).
 Renamed the integration test and developer inspection example without changing
 their contents. Updated only Phase 0-related master checklist entries. Added Daisy overrides to
@@ -196,7 +208,7 @@ protections changed; runtime source and application dependencies did not.
 
 The master plan is authoritative. Inventory, exact SHA, remotes, protected branch
 structure/dev, upstream documents, screenshots, dependency/architecture/license
-audits and branding plan are validated audit deliverables. Complete cold/exact-build performance coverage remains unvalidated.
+audits and branding plan are validated audit deliverables. True cold startup remains unvalidated.
 Completed Phase 0 rows: inventory fork; upstream SHA; remotes; branch protection;
 dev; upstream docs; baseline tests; screenshots; dependencies; architecture; licensing audit;
 branding replacement plan; CI. Completed Task A rows: root; branch/remotes; exact
@@ -207,8 +219,7 @@ or later feature checklist was advanced.
 
 ## 16. Blocked/unresolved
 
-Real cold startup and exact-build authenticated
-performance; multi-hour/day browsing/audio soak; legal/package attribution
+Real cold startup; multi-hour/day browsing/audio soak; legal/package attribution
 compliance and upstream advisory remediation. The last two were audited but are
 release risks, not scope for a broad Phase 0 dependency/audio rewrite.
 

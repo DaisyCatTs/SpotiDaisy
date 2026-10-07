@@ -1,0 +1,15 @@
+{
+  "Label": "checkout-paused-minimized",
+  "Binary": "<repo>/target/release/spotifast.exe",
+  "Sha256": "9859B5BD13B4EE8927CD144DE73B203A622D9E85613BC62BC03987FF286176D4",
+  "Version": "spotifast 0.12.0",
+  "LogicalProcessors": 16,
+  "Samples": 60,
+  "CpuMean": 0.0016266666666666667,
+  "CpuMax": 0.0488,
+  "WorkingSetMin": 231.418,
+  "WorkingSetMax": 257.008,
+  "PrivateFirst": 426.098,
+  "PrivateLast": 400.301,
+  "Caveat": "Checkout production build, existing local profile. User confirmed playback paused and application minimized before sampling. No credential access or playback control by sampler. Minimized rendering differs from a visible idle window."
+}

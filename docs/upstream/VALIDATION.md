@@ -103,6 +103,41 @@ No claim of exhaustive accessibility, all interaction states or all sizes.
 
 ## Performance method
 
+### Exact-checkout production measurement follow-up
+
+The user explicitly authorized temporarily switching from installed Spotifast to
+the built production application, and exited the installed tray process. The
+existing profile restored authentication through the application's normal path;
+no grants were copied or inspected. Production executable SHA-256:
+`9859B5BD13B4EE8927CD144DE73B203A622D9E85613BC62BC03987FF286176D4`.
+`measure-production-startup.ps1` recorded warm main-window readiness of 65.08 ms.
+It records boot age and refuses to start while any Spotifast process exists.
+Its syntax check and refusal path passed; the successful production launch
+validated its readiness/evidence path. It leaves the application open.
+
+The user confirmed a normal song playing after being asked to choose this
+computer. Two minutes / 60 samples averaged 0.04146% total-machine CPU,
+maximum 0.1463%; working set 227.137-227.348 MiB and private commit
+369.902 to 369.371 MiB. See `evidence/checkout-playing.json` and CSV.
+This is a different song/session from the installed-release sample, so the
+difference is not evidence of a performance improvement. Locality relies on
+the requested user setup, not an instrumented audio-output probe.
+
+The user then confirmed playback paused and the application minimized.
+Two minutes / 60 samples averaged 0.00163% total-machine CPU, maximum
+0.0488%; working set 231.418-257.008 MiB and private commit 426.098 to
+400.301 MiB. See `evidence/checkout-paused-minimized.json` and CSV.
+This is minimized idle, not visible-window idle. Transient memory changes
+between intervals are not a leak or plateau conclusion. Both samples completed
+with the same executable hash and process. The application was left open.
+
+For a first launch following a user-scheduled restart, run the startup script
+with `-Condition FirstLaunchAfterRestart` before opening Spotifast. The script
+does not reboot, clear OS caches, or certify cold caches from boot age alone.
+Main-window readiness remains distinct from first paint or authenticated readiness.
+
+### Earlier demo and installed-release measurements
+
 `measure-baseline.ps1` launches the optimized **demo** four times using an
 isolated profile. Time is process launch to a nonzero native main-window handle,
 not first paint or interactive readiness. Run zero uses a fresh profile, but OS
@@ -180,9 +215,10 @@ inspected for attribution material; its binary was not executed.
 
 ## Remaining measurement gaps
 
-True cold startup (reboot or controlled cache state), authenticated startup at
-this exact source commit, authenticated playback CPU at this exact build, and
-multi-hour/day browsing/playback soak remain unvalidated. A ten-minute static
+True cold startup (reboot or controlled cache state), authenticated readiness
+timing beyond the native-window proxy, and multi-hour/day browsing/playback soak
+remain unvalidated. Exact-build warm window startup and authenticated playback
+have now been measured above. A ten-minute static
 demo cannot prove cache bounds, 10k/100k library behavior or memory leak absence.
 MilkDrop/EQ/device reconnect/gaplessness under real audio load also need dedicated
 later validation. These gaps must remain visible in the master checklist.
